@@ -2,93 +2,63 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-
-const tools = [
-  {
-    name: "Video Translator for Mac",
-    slug: "video-translator",
-    tagline: "Translate video subtitles automatically. Export SRT or captioned video.",
-    status: "available",
-    version: "v0.1.0 Beta",
-    formats: ["MP4", "MOV"],
-    icon: "🎬",
-  },
-  {
-    name: "SRT Translator",
-    slug: null,
-    tagline: "Upload an SRT file, get it translated to any language.",
-    status: "coming-soon",
-    icon: "💬",
-  },
-  {
-    name: "Subtitle Burner",
-    slug: null,
-    tagline: "Hardcode any SRT file into a video with one click.",
-    status: "coming-soon",
-    icon: "🔥",
-  },
-  {
-    name: "Audio Transcriber",
-    slug: null,
-    tagline: "Convert audio recordings to text. Export as TXT or SRT.",
-    status: "coming-soon",
-    icon: "🎙",
-  },
-  {
-    name: "Video Compressor",
-    slug: null,
-    tagline: "Compress videos for web, social, or storage — without quality loss.",
-    status: "coming-soon",
-    icon: "📦",
-  },
-];
 ---
 
-<Layout title="Tools" description="All lightweight AI video tools by Tiny Video Tools. Translate subtitles, burn captions, transcribe audio, and more on Mac.">
+<Layout title="Tools" description="All tools by LingYue Tools — AI video translation, dubbing, subtitle generation for Mac.">
   <Nav slot="nav" />
 
-  <section class="page-hero">
+  <section class="section">
     <div class="container">
-      <h1>Tools</h1>
-      <p class="page-subtitle">
-        Each tool solves one specific problem. Small, fast, local-first.
-      </p>
-    </div>
-  </section>
+      <div class="page-header">
+        <h1>Tools</h1>
+        <p>Lightweight AI tools for video creators. macOS-first, privacy-respecting, no subscription.</p>
+      </div>
 
-  <section class="section-sm">
-    <div class="container">
-      <div class="tools-grid">
-        {tools.map(tool => (
-          <div class:list={["tool-card", { "tool-card--available": tool.status === "available" }]}>
+      <!-- Available -->
+      <div class="tools-section">
+        <h2 class="tools-section-title">Available now</h2>
+        <div class="tools-grid">
+          <a href="/tools/ai-translate-dub" class="tool-card">
             <div class="tool-card-header">
-              <span class="tool-card-icon">{tool.icon}</span>
-              <div class="tool-card-badges">
-                {tool.status === "available" && (
-                  <span class="badge badge-beta">{tool.version}</span>
-                )}
-                {tool.status === "coming-soon" && (
-                  <span class="badge badge-soon">Coming Soon</span>
-                )}
+              <div class="tool-card-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                  <rect width="28" height="28" rx="8" fill="#EEF2FF"/>
+                  <path d="M9 10l6 4-6 4V10z" fill="#4F46E5"/>
+                  <path d="M17 8h1.5M17 12h1.5M17 16h1.5M17 20h1.5" stroke="#4F46E5" stroke-width="1.25" stroke-linecap="round"/>
+                </svg>
               </div>
+              <span class="badge badge-beta">Beta</span>
             </div>
-            <h3 class="tool-card-name">{tool.name}</h3>
-            <p class="tool-card-tagline">{tool.tagline}</p>
-            {tool.formats && (
-              <div class="tool-card-formats">
-                {tool.formats.map(f => <span>{f}</span>)}
-              </div>
-            )}
-            {tool.slug ? (
-              <div class="tool-card-actions">
-                <a href={`/tools/${tool.slug}`} class="btn btn-primary">Learn More</a>
-                <a href="/download" class="btn btn-outline">Download</a>
-              </div>
-            ) : (
-              <p class="tool-card-soon-note">In development — check back later.</p>
-            )}
-          </div>
-        ))}
+            <h3 class="tool-card-name">AI Translate &amp; Dub</h3>
+            <p class="tool-card-desc">
+              Transcribe video with Whisper, translate subtitles via Ollama or DeepSeek, export SRT, MKV soft-sub, or hard-burned MP4.
+            </p>
+            <div class="tool-card-meta">
+              <span>macOS arm64</span>
+              <span>v1.0.0</span>
+              <span>Free</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coming soon -->
+      <div class="tools-section">
+        <h2 class="tools-section-title">Coming soon</h2>
+        <div class="tools-grid">
+          {[
+            { name: "Batch Subtitle Export", desc: "Translate and export subtitles for multiple videos at once." },
+            { name: "Audio Dubbing Studio", desc: "Multi-speaker AI dubbing with voice matching." },
+            { name: "Clip Trimmer", desc: "Cut and trim clips before translation — no timeline editor needed." },
+            { name: "Format Converter", desc: "Convert between SRT, VTT, ASS and other subtitle formats in bulk." },
+          ].map(t => (
+            <div class="tool-card tool-card-soon">
+              <span class="badge badge-soon">Soon</span>
+              <h3 class="tool-card-name">{t.name}</h3>
+              <p class="tool-card-desc">{t.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -97,82 +67,31 @@ const tools = [
 </Layout>
 
 <style>
-  .page-hero {
-    padding: 4rem 0 2.5rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-  .page-hero h1 { margin-bottom: 0.6rem; }
-  .page-subtitle {
-    font-size: 1.0625rem;
-    color: var(--color-text-secondary);
-    max-width: 48ch;
-  }
+.page-header { margin-bottom: 3rem; }
+.page-header h1 { margin-bottom: 0.5rem; }
+.page-header p { color: var(--color-text-secondary); font-size: 1rem; }
 
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.25rem;
-  }
+.tools-section { margin-bottom: 3rem; }
+.tools-section-title { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-text-muted); margin-bottom: 1rem; }
 
-  .tool-card {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    opacity: 0.7;
-    transition: box-shadow 0.2s, border-color 0.2s, opacity 0.2s;
-  }
-  .tool-card--available {
-    opacity: 1;
-    border-color: var(--color-border);
-  }
-  .tool-card--available:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-border-strong);
-  }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
 
-  .tool-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.4rem;
-  }
-  .tool-card-icon { font-size: 1.6rem; line-height: 1; }
-  .tool-card-name { font-size: 1.05rem; font-weight: 700; }
-  .tool-card-tagline { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; flex: 1; }
-  .tool-card-formats {
-    display: flex;
-    gap: 0.35rem;
-    flex-wrap: wrap;
-    margin-top: 0.25rem;
-  }
-  .tool-card-formats span {
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 0.15rem 0.45rem;
-    border-radius: 4px;
-    background: var(--color-bg-muted);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .tool-card-actions {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-  }
-  .tool-card-actions .btn {
-    padding: 0.45rem 0.9rem;
-    font-size: 0.875rem;
-  }
-  .tool-card-soon-note {
-    margin-top: 0.75rem;
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-    font-style: italic;
-  }
+.tool-card {
+  display: block; text-decoration: none; color: inherit;
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 1.5rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+a.tool-card:hover { border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
+.tool-card-soon { opacity: 0.7; }
+.tool-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
+.tool-card-icon { line-height: 0; }
+.tool-card-name { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+.tool-card-desc { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; }
+.tool-card-meta { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+.tool-card-meta span {
+  font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem;
+  border-radius: 4px; background: var(--color-bg-muted);
+  color: var(--color-text-muted); border: 1px solid var(--color-border);
+}
 </style>

@@ -1,0 +1,293 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const dmgUrl = "https://github.com/Badakonpro/ai-translate-dub/releases/download/v1.0.0/AI-Translate-Dub-1.0.0-arm64.dmg";
+
+const features = [
+  {
+    icon: "🎙",
+    title: "Whisper transcription",
+    desc: "Transcribe speech from any video using OpenAI Whisper. Choose from tiny, base, small, medium, or large models. Models are cached locally — no repeat downloads.",
+  },
+  {
+    icon: "🌐",
+    title: "Two translation backends",
+    desc: "Use a local Ollama model (100% private, no API key) or connect to DeepSeek for high-quality cloud translation. Switch anytime.",
+  },
+  {
+    icon: "📝",
+    title: "Global translation context",
+    desc: "Optionally generate a topic, terminology, and style prompt from your video before translating. Improves consistency for technical, educational, or niche content.",
+  },
+  {
+    icon: "⚡️",
+    title: "Parallel translation",
+    desc: "Translate multiple subtitle segments simultaneously. Adjust worker count to balance speed against API rate limits.",
+  },
+  {
+    icon: "📦",
+    title: "Three output formats",
+    desc: "Export a standalone .srt file, an .mkv with a soft subtitle track (switchable in any player), or a hard-burned .mp4 ready for upload.",
+  },
+  {
+    icon: "🖥",
+    title: "Runs on your Mac",
+    desc: "Electron shell with a local Gradio UI. No cloud upload unless you use DeepSeek. Your videos never leave your machine by default.",
+  },
+];
+
+const steps = [
+  { n: "01", title: "Install the app", desc: "Download the DMG, drag to Applications, and launch. App starts a local Gradio server automatically." },
+  { n: "02", title: "Upload your video", desc: "Drop any MP4 or MOV into the Gradio UI. Audio is extracted at 16 kHz mono." },
+  { n: "03", title: "Pick a Whisper model", desc: "Select tiny → large depending on your accuracy and speed needs. Model downloads once, then caches locally." },
+  { n: "04", title: "Choose a translation backend", desc: "Connect to a running Ollama instance or enter your DeepSeek API key." },
+  { n: "05", title: "Run and export", desc: "Transcription, translation, and muxing all happen in one click. Pick SRT, MKV, or MP4 output." },
+];
+---
+
+<Layout title="AI Translate & Dub" description="AI video transcription and subtitle translation for Mac. Whisper + Ollama/DeepSeek. Outputs SRT, MKV, or MP4.">
+  <Nav slot="nav" />
+
+  <!-- HERO -->
+  <section class="tool-hero">
+    <div class="container tool-hero-inner">
+      <div>
+        <div class="tool-hero-badges">
+          <span class="badge badge-beta">Beta</span>
+          <span class="tool-hero-version">v1.0.0</span>
+          <span class="tool-hero-platform">macOS arm64</span>
+        </div>
+        <h1 class="tool-hero-title">AI Translate &amp; Dub</h1>
+        <p class="tool-hero-desc">
+          Transcribe video with Whisper, translate subtitles via Ollama or DeepSeek,
+          and export SRT, MKV, or hard-burned MP4 — all from a local Mac app.
+          No account required. No subscription.
+        </p>
+        <div class="tool-hero-actions">
+          <a href={dmgUrl} class="btn btn-primary btn-lg">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9M4.5 7l3.5 3.5L11.5 7M2 13h12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download DMG — Free
+          </a>
+          <a href="/download" class="btn btn-outline btn-lg">All Downloads</a>
+        </div>
+        <p class="tool-hero-req">macOS · Apple Silicon (arm64) · Python 3 + ffmpeg required</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>What it does</h2>
+      </div>
+      <div class="features-grid">
+        {features.map(f => (
+          <div class="feature-card">
+            <div class="feature-icon">{f.icon}</div>
+            <h3>{f.title}</h3>
+            <p>{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2>How it works</h2>
+      </div>
+      <ol class="steps">
+        {steps.map(s => (
+          <li class="step">
+            <div class="step-number">{s.n}</div>
+            <div>
+              <h3 class="step-title">{s.title}</h3>
+              <p class="step-desc">{s.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- OUTPUT FORMATS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Output formats</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Format</th><th>Description</th><th>Best for</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.srt</code></td>
+              <td>Plain subtitle file with timestamps</td>
+              <td>Re-use in any editor or player</td>
+            </tr>
+            <tr>
+              <td><code>.mkv</code></td>
+              <td>Original video + soft subtitle track</td>
+              <td>Local playback, subtitle toggle in VLC/IINA</td>
+            </tr>
+            <tr>
+              <td><code>.mp4</code></td>
+              <td>Hard-burned subtitles baked into video</td>
+              <td>Upload-ready for YouTube, social media</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUIREMENTS -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2>Requirements</h2>
+      </div>
+      <div class="req-grid">
+        <div class="req-card">
+          <h3>System</h3>
+          <ul>
+            <li>macOS (Apple Silicon arm64 recommended)</li>
+            <li>Python 3 installed on your machine</li>
+            <li>ffmpeg (<code>brew install ffmpeg</code>)</li>
+          </ul>
+        </div>
+        <div class="req-card">
+          <h3>For local translation (Ollama)</h3>
+          <ul>
+            <li>Ollama running locally</li>
+            <li>Any compatible model pulled, e.g. <code>qwen3:latest</code></li>
+            <li>No internet required after setup</li>
+          </ul>
+        </div>
+        <div class="req-card">
+          <h3>For cloud translation (DeepSeek)</h3>
+          <ul>
+            <li>DeepSeek API key</li>
+            <li>Internet connection</li>
+            <li>Pay-per-use (no subscription)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>FAQ</h2>
+      </div>
+      <dl class="faq">
+        <div class="faq-item">
+          <dt>Does it upload my video to the cloud?</dt>
+          <dd>No. Video processing (audio extraction, Whisper transcription) all happens locally. Only the subtitle text is sent to DeepSeek if you choose that backend. Ollama is 100% local.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>Which Whisper model should I use?</dt>
+          <dd><code>base</code> is fast and accurate enough for most content. Use <code>medium</code> or <code>large</code> for technical or heavily accented speech. Models are cached after the first download.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>Can I translate into any language?</dt>
+          <dd>Translation quality depends on your chosen backend model. Ollama models like <code>qwen3</code> support Chinese, Japanese, Korean, and major European languages. DeepSeek covers 50+ languages.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>Is Intel Mac supported?</dt>
+          <dd>The current DMG is arm64 only. Intel support may be added in a future release. You can run from source on Intel now.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>Is it free?</dt>
+          <dd>Yes. The app is free and open-source (MIT). DeepSeek API usage is billed by DeepSeek directly at their standard rates.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <div class="container cta-strip-inner">
+      <div>
+        <h2>Download AI Translate &amp; Dub</h2>
+        <p>v1.0.0 · macOS arm64 · Free &amp; open source (MIT)</p>
+      </div>
+      <div class="cta-strip-actions">
+        <a href={dmgUrl} class="btn btn-primary btn-lg">Download DMG</a>
+        <a href="https://github.com/Badakonpro/ai-translate-dub" target="_blank" rel="noopener" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.35);">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+.tool-hero { padding: 5rem 0 4rem; border-bottom: 1px solid var(--color-border); }
+.tool-hero-badges { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.tool-hero-version, .tool-hero-platform {
+  font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.55rem;
+  border-radius: 4px; background: var(--color-bg-muted);
+  color: var(--color-text-muted); border: 1px solid var(--color-border);
+}
+.tool-hero-title { margin-bottom: 1rem; }
+.tool-hero-desc { max-width: 55ch; font-size: 1.0625rem; color: var(--color-text-secondary); margin-bottom: 1.75rem; }
+.tool-hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.tool-hero-req { margin-top: 1rem; font-size: 0.8125rem; color: var(--color-text-muted); }
+
+.section-header { margin-bottom: 2.5rem; }
+.section-header h2 { margin-bottom: 0; }
+.section-bg { background: var(--color-bg-subtle); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.feature-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; }
+.feature-icon { font-size: 1.75rem; margin-bottom: 0.9rem; }
+.feature-card h3 { margin-bottom: 0.4rem; font-size: 1rem; }
+.feature-card p { font-size: 0.875rem; color: var(--color-text-secondary); }
+
+.steps { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; max-width: 680px; }
+.step { display: flex; gap: 1.25rem; align-items: flex-start; }
+.step-number { font-size: 0.8125rem; font-weight: 800; color: var(--color-accent); background: #EEF2FF; border-radius: 6px; padding: 0.25rem 0.6rem; flex-shrink: 0; letter-spacing: 0.04em; margin-top: 0.1rem; }
+.step-title { font-size: 1rem; margin-bottom: 0.3rem; }
+.step-desc { font-size: 0.875rem; color: var(--color-text-secondary); }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th { text-align: left; font-size: 0.8125rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding: 0.6rem 1rem; border-bottom: 2px solid var(--color-border); }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); color: var(--color-text-secondary); }
+tr:last-child td { border-bottom: none; }
+td:first-child { color: var(--color-text); font-weight: 600; }
+
+.req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.req-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; }
+.req-card h3 { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+.req-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.req-card li { font-size: 0.875rem; color: var(--color-text-secondary); padding-left: 1rem; position: relative; }
+.req-card li::before { content: "·"; position: absolute; left: 0; color: var(--color-accent); font-weight: 700; }
+
+.faq { max-width: 680px; display: flex; flex-direction: column; gap: 1.5rem; }
+.faq-item dt { font-weight: 600; margin-bottom: 0.4rem; }
+.faq-item dd { font-size: 0.9375rem; color: var(--color-text-secondary); margin: 0; }
+
+.cta-strip { background: var(--color-accent); padding: 4rem 0; }
+.cta-strip-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.cta-strip h2 { color: #fff; }
+.cta-strip p { color: rgba(255,255,255,0.75); margin-top: 0.35rem; font-size: 0.9375rem; }
+.cta-strip-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.cta-strip .btn-primary { background: #fff; color: var(--color-accent); border-color: #fff; }
+.cta-strip .btn-primary:hover { background: #F0F0FF; }
+
+@media (max-width: 600px) {
+  .tool-hero { padding: 3.5rem 0 3rem; }
+  .cta-strip-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>

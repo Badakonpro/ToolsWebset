@@ -6,18 +6,18 @@ import Footer from '../components/Footer.astro';
 const features = [
   {
     icon: "🎬",
-    title: "Drop a video, get subtitles",
-    desc: "Drag in any MP4 or MOV. The app transcribes and translates automatically — no manual upload, no browser required.",
+    title: "AI translation in one click",
+    desc: "Drop in a video. AI transcribes the speech, translates the dialogue, and delivers a subtitle file or dubbed audio — automatically.",
   },
   {
-    icon: "🌍",
-    title: "Translate to any language",
-    desc: "Supports 50+ languages. Generate SRT subtitle files or burn captions directly into the video.",
+    icon: "🎙",
+    title: "AI voice dubbing",
+    desc: "Replace the original audio with natural-sounding AI voices in your target language. No recording studio needed.",
   },
   {
     icon: "🖥",
     title: "Runs locally on Mac",
-    desc: "No account, no cloud processing by default. Your files stay on your machine unless you opt in to AI services.",
+    desc: "No account, no cloud upload by default. Your videos stay on your machine unless you opt in to AI services.",
   },
   {
     icon: "⚡️",
@@ -27,15 +27,15 @@ const features = [
 ];
 
 const useCases = [
-  { emoji: "📹", text: "YouTubers adding subtitles to foreign-language videos" },
+  { emoji: "📹", text: "YouTubers dubbing videos for foreign audiences" },
   { emoji: "📱", text: "Reels & TikTok creators going multilingual" },
-  { emoji: "🎓", text: "Course creators subtitling lecture recordings" },
-  { emoji: "🎙", text: "Podcasters adding captions to video exports" },
+  { emoji: "🎓", text: "Course creators localizing lecture recordings" },
+  { emoji: "🎙", text: "Podcasters dubbing audio exports" },
   { emoji: "🌏", text: "Anyone sharing content across language barriers" },
 ];
 ---
 
-<Layout title="Home" description="Lightweight AI video tools for creators. Translate subtitles, burn captions, and export multilingual videos — all on your Mac.">
+<Layout title="Home" description="LingYue Tools — AI video translation and dubbing for Mac. Translate subtitles, generate SRT, and dub videos in 50+ languages.">
   <Nav slot="nav" />
 
   <!-- HERO -->
@@ -43,15 +43,15 @@ const useCases = [
     <div class="container hero-inner">
       <div class="hero-badge">
         <span class="badge badge-beta">Beta</span>
-        <span class="hero-badge-text">Video Translator for Mac is now available</span>
+        <span class="hero-badge-text">AI Translate & Dub for Mac is now available</span>
       </div>
       <h1 class="hero-title">
-        Lightweight AI video tools
-        <span class="hero-title-accent"> for creators</span>
+        AI video translation
+        <span class="hero-title-accent"> & dubbing</span>
       </h1>
       <p class="hero-subtitle">
-        Translate video subtitles, generate multilingual SRT files, and export captioned videos.
-        Runs on your Mac. No account required.
+        Translate subtitles and dub your videos into 50+ languages — all on your Mac.
+        No account required.
       </p>
       <div class="hero-actions">
         <a href="/download" class="btn btn-primary btn-lg">
@@ -72,26 +72,27 @@ const useCases = [
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
             <rect width="36" height="36" rx="10" fill="#EEF2FF"/>
             <path d="M12 13l7 5-7 5V13z" fill="#4F46E5"/>
-            <path d="M22 13h2M22 18h2M22 23h2" stroke="#4F46E5" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M22 10h2M22 15h2M22 20h2M22 25h2" stroke="#4F46E5" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="tool-spotlight-body">
           <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
-            <h2 class="tool-spotlight-name">Video Translator for Mac</h2>
+            <h2 class="tool-spotlight-name">AI Translate & Dub</h2>
             <span class="badge badge-beta">Beta</span>
           </div>
           <p class="tool-spotlight-desc">
-            Drop in a video, pick your target language, get a translated SRT file or a video with burnt-in captions — all in a few clicks.
+            Drop in a video, pick your target language — get a translated SRT file,
+            a captioned video, or a fully dubbed version with AI voices. All on your Mac.
           </p>
           <div class="tool-spotlight-actions">
-            <a href="/tools/video-translator" class="btn btn-primary">Learn More</a>
+            <a href="/tools/ai-translate-dub" class="btn btn-primary">Learn More</a>
             <a href="/download" class="btn btn-outline">Download</a>
           </div>
         </div>
         <div class="tool-spotlight-formats">
           <p class="formats-label">Supports</p>
           <div class="formats-tags">
-            <span>MP4</span><span>MOV</span><span>SRT out</span><span>Hardcoded captions</span>
+            <span>MP4</span><span>MOV</span><span>SRT out</span><span>AI dubbing</span>
           </div>
         </div>
       </div>
@@ -143,7 +144,7 @@ const useCases = [
         <div>
           <h3>Built by one developer</h3>
           <p>
-            This is a personal tools site maintained by a single independent developer.
+            LingYue Tools is a personal tools site maintained by a single independent developer.
             If you run into a bug or have a feature request, just send me an email —
             I read every message.
           </p>
@@ -162,7 +163,7 @@ const useCases = [
       </div>
       <div class="cta-strip-actions">
         <a href="/download" class="btn btn-primary btn-lg">Download Beta</a>
-        <a href="/tools/video-translator" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.35);">See Full Details</a>
+        <a href="/tools/ai-translate-dub" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.35);">See Full Details</a>
       </div>
     </div>
   </section>
