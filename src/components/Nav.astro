@@ -1,17 +1,34 @@
 ---
-const navLinks = [
+const pathname = Astro.url.pathname;
+const lang = pathname.startsWith('/zh') ? 'zh' : 'en';
+const prefix = lang === 'zh' ? '/zh' : '';
+
+const navLinks = lang === 'zh' ? [
+  { href: `${prefix}/tools`, label: "工具" },
+  { href: `${prefix}/download`, label: "下载" },
+  { href: `${prefix}/changelog`, label: "更新日志" },
+  { href: `${prefix}/about`, label: "关于" },
+] : [
   { href: "/tools", label: "Tools" },
   { href: "/download", label: "Download" },
   { href: "/changelog", label: "Changelog" },
   { href: "/about", label: "About" },
 ];
 
-const currentPath = Astro.url.pathname;
+const logoHref = lang === 'zh' ? '/zh/' : '/';
+const downloadHref = `${prefix}/download`;
+const downloadLabel = lang === 'zh' ? '下载 Beta' : 'Download Beta';
+
+// Language switcher
+const switchLabel = lang === 'zh' ? 'EN' : '中文';
+const switchHref = lang === 'en'
+  ? `/zh${pathname === '/' ? '/' : pathname}`
+  : (pathname.replace(/^\/zh/, '') || '/');
 ---
 
 <header class="site-nav">
   <div class="container nav-inner">
-    <a href="/" class="nav-logo" aria-label="LingYue Tools home">
+    <a href={logoHref} class="nav-logo" aria-label="LingYue Tools home">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
         <rect width="22" height="22" rx="5" fill="#4F46E5"/>
         <path d="M7 8.5L11 6L15 8.5V13.5L11 16L7 13.5V8.5Z" fill="white" opacity="0.9"/>
@@ -24,7 +41,7 @@ const currentPath = Astro.url.pathname;
       {navLinks.map(link => (
         <a
           href={link.href}
-          class:list={["nav-link", { active: currentPath.startsWith(link.href) }]}
+          class:list={["nav-link", { active: pathname.startsWith(link.href) }]}
         >
           {link.label}
         </a>
@@ -32,8 +49,9 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <div class="nav-actions">
-      <a href="/download" class="btn btn-primary nav-cta">
-        Download Beta
+      <a href={switchHref} class="lang-toggle" lang={lang === 'zh' ? 'en' : 'zh'}>{switchLabel}</a>
+      <a href={downloadHref} class="btn btn-primary nav-cta">
+        {downloadLabel}
       </a>
     </div>
 
@@ -49,9 +67,10 @@ const currentPath = Astro.url.pathname;
       {navLinks.map(link => (
         <a href={link.href} class="mobile-nav-link">{link.label}</a>
       ))}
-      <a href="/download" class="btn btn-primary" style="margin-top: 0.5rem; justify-content: center;">
-        Download Beta
-      </a>
+      <div style="display:flex;gap:0.5rem;margin-top:0.5rem;align-items:center;">
+        <a href={downloadHref} class="btn btn-primary" style="flex:1;justify-content:center;">{downloadLabel}</a>
+        <a href={switchHref} class="lang-toggle" lang={lang === 'zh' ? 'en' : 'zh'}>{switchLabel}</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -118,6 +137,22 @@ const currentPath = Astro.url.pathname;
 
   .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
   .nav-cta { padding: 0.45rem 1rem; font-size: 0.875rem; }
+
+  .lang-toggle {
+    font-size: 0.8125rem; font-weight: 600;
+    color: var(--color-text-secondary);
+    text-decoration: none !important;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    flex-shrink: 0;
+  }
+  .lang-toggle:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    background: var(--color-accent-subtle);
+  }
 
   .nav-hamburger {
     display: none;

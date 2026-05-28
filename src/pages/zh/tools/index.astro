@@ -1,0 +1,97 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+---
+
+<Layout title="工具" description="LingYue Tools 全部工具 — Mac 端 AI 视频翻译、配音、字幕生成。">
+  <Nav slot="nav" />
+
+  <section class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>工具</h1>
+        <p>面向视频创作者的轻量 AI 工具。以 macOS 为主，注重隐私，无需订阅。</p>
+      </div>
+
+      <!-- 现已提供 -->
+      <div class="tools-section">
+        <h2 class="tools-section-title">现已提供</h2>
+        <div class="tools-grid">
+          <a href="/zh/tools/ai-translate-dub" class="tool-card">
+            <div class="tool-card-header">
+              <div class="tool-card-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                  <rect width="28" height="28" rx="8" fill="#EEF2FF"/>
+                  <path d="M9 10l6 4-6 4V10z" fill="#4F46E5"/>
+                  <path d="M17 8h1.5M17 12h1.5M17 16h1.5M17 20h1.5" stroke="#4F46E5" stroke-width="1.25" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="badge badge-beta">测试版</span>
+            </div>
+            <h3 class="tool-card-name">AI 翻译配音</h3>
+            <p class="tool-card-desc">
+              使用 Whisper 转录视频字幕，通过 Ollama 或 DeepSeek 翻译，导出 SRT、MKV 软字幕或硬烧录 MP4。
+            </p>
+            <div class="tool-card-meta">
+              <span>macOS arm64</span>
+              <span>v1.0.0</span>
+              <span>免费</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- 即将推出 -->
+      <div class="tools-section">
+        <h2 class="tools-section-title">即将推出</h2>
+        <div class="tools-grid">
+          {[
+            { name: "字幕批量导出", desc: "一次性翻译并导出多段视频的字幕。" },
+            { name: "多声道 AI 配音", desc: "多说话人 AI 配音，匹配原声音色。" },
+            { name: "视频片段裁剪", desc: "翻译前先剪辑视频片段，无需时间轴编辑器。" },
+            { name: "字幕格式转换", desc: "批量转换 SRT、VTT、ASS 等字幕格式。" },
+          ].map(t => (
+            <div class="tool-card tool-card-soon">
+              <span class="badge badge-soon">即将推出</span>
+              <h3 class="tool-card-name">{t.name}</h3>
+              <p class="tool-card-desc">{t.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+.page-header { margin-bottom: 3rem; }
+.page-header h1 { margin-bottom: 0.5rem; }
+.page-header p { color: var(--color-text-secondary); font-size: 1rem; }
+
+.tools-section { margin-bottom: 3rem; }
+.tools-section-title { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-text-muted); margin-bottom: 1rem; }
+
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+
+.tool-card {
+  display: block; text-decoration: none; color: inherit;
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 1.5rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+a.tool-card:hover { border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
+.tool-card-soon { opacity: 0.7; }
+.tool-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
+.tool-card-icon { line-height: 0; }
+.tool-card-name { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+.tool-card-desc { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; }
+.tool-card-meta { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+.tool-card-meta span {
+  font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem;
+  border-radius: 4px; background: var(--color-bg-muted);
+  color: var(--color-text-muted); border: 1px solid var(--color-border);
+}
+</style>

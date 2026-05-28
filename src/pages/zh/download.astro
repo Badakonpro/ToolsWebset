@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const releases = [
+  {
+    tool: "AI 翻译配音",
+    version: "v1.0.0",
+    date: "2026-05-28",
+    badge: "badge-beta",
+    badgeLabel: "测试版",
+    assets: [
+      {
+        label: "macOS（Apple Silicon）",
+        filename: "AI-Translate-Dub-1.0.0-arm64.dmg",
+        url: "https://github.com/Badakonpro/ai-translate-dub/releases/download/v1.0.0/AI-Translate-Dub-1.0.0-arm64.dmg",
+        size: "~112 MB",
+        icon: "💻",
+      },
+    ],
+    notes: [
+      "打开 DMG，将 AI 翻译配音 拖到 Applications 文件夹，然后启动",
+      "应用会自动启动本地 Gradio 服务，浏览器未自动打开时请手动访问 http://127.0.0.1:7860",
+      "安装 Python 依赖：pip install -r requirements.txt（需要 Python 3）",
+      "安装 ffmpeg：brew install ffmpeg",
+      "Ollama 后端：启动 Ollama，在应用内拉取模型（如 qwen3:latest）",
+      "DeepSeek 后端：在应用设置中填入 DeepSeek API Key，无需本地 GPU",
+    ],
+    releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.0.0",
+  },
+];
+---
+
+<Layout title="下载" description="下载 LingYue Tools 应用。AI 翻译配音 — 免费的 macOS 视频转录与字幕翻译工具。">
+  <Nav slot="nav" />
+
+  <section class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>下载</h1>
+        <p>所有工具均免费，无需账号。</p>
+      </div>
+
+      {releases.map(r => (
+        <div class="release-card">
+          <div class="release-header">
+            <div>
+              <h2 class="release-tool">{r.tool}</h2>
+              <div class="release-meta">
+                <span class={`badge ${r.badge}`}>{r.badgeLabel}</span>
+                <span class="release-version">{r.version}</span>
+                <span class="release-date">发布于 {r.date}</span>
+              </div>
+            </div>
+            <a href={r.releaseUrl} target="_blank" rel="noopener" class="btn btn-outline">查看发布说明</a>
+          </div>
+
+          <div class="assets-list">
+            {r.assets.map(a => (
+              <a href={a.url} class="asset-row">
+                <span class="asset-icon">{a.icon}</span>
+                <div class="asset-info">
+                  <span class="asset-label">{a.label}</span>
+                  <span class="asset-filename">{a.filename}</span>
+                </div>
+                <span class="asset-size">{a.size}</span>
+                <span class="asset-download-btn">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9M4.5 7l3.5 3.5L11.5 7M2 13h12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  下载
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <div class="release-notes">
+            <h3>安装说明</h3>
+            <ul>
+              {r.notes.map(n => <li>{n}</li>)}
+            </ul>
+          </div>
+        </div>
+      ))}
+
+      <div class="source-note">
+        <p>
+          所有工具均开源。
+          <a href="https://github.com/Badakonpro/ai-translate-dub" target="_blank" rel="noopener">在 GitHub 上查看源码</a>，
+          如不使用预构建 DMG，也可从源码运行。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+.page-header { margin-bottom: 2.5rem; }
+.page-header p { color: var(--color-text-secondary); }
+
+.release-card {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem;
+}
+.release-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.release-tool { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.release-meta { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.release-version { font-size: 0.8125rem; font-weight: 700; color: var(--color-text); }
+.release-date { font-size: 0.8125rem; color: var(--color-text-muted); }
+
+.assets-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+.asset-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.9rem 1.1rem; border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); text-decoration: none; color: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+.asset-row:hover { border-color: var(--color-accent); background: #fafafa; }
+.asset-icon { font-size: 1.25rem; flex-shrink: 0; }
+.asset-info { flex: 1; min-width: 0; }
+.asset-label { display: block; font-size: 0.9375rem; font-weight: 600; }
+.asset-filename { display: block; font-size: 0.8125rem; color: var(--color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.asset-size { font-size: 0.8125rem; color: var(--color-text-muted); flex-shrink: 0; }
+.asset-download-btn {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8125rem; font-weight: 700; color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.release-notes h3 { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 0.75rem; }
+.release-notes ul { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.release-notes li { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.5; }
+
+.source-note {
+  background: var(--color-bg-subtle); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: 1.25rem 1.5rem;
+}
+.source-note p { font-size: 0.9rem; color: var(--color-text-secondary); }
+</style>

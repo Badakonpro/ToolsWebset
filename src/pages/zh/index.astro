@@ -1,0 +1,312 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const tools = [
+  {
+    slug: "ai-translate-dub",
+    name: "AI 翻译配音",
+    desc: "使用 Whisper 转录视频字幕，通过 Ollama 或 DeepSeek 翻译，导出 SRT、MKV 或硬烧录 MP4。",
+    badge: "beta",
+    badgeLabel: "测试版",
+    platform: "macOS arm64",
+    version: "v1.0.0",
+    available: true,
+  },
+  {
+    slug: null,
+    name: "字幕批量导出",
+    desc: "一次性翻译并导出多段视频的字幕。",
+    badge: "soon",
+    badgeLabel: "即将推出",
+    platform: "macOS",
+    version: null,
+    available: false,
+  },
+  {
+    slug: null,
+    name: "多声道 AI 配音",
+    desc: "多说话人 AI 配音，匹配原声音色。",
+    badge: "soon",
+    badgeLabel: "即将推出",
+    platform: "macOS",
+    version: null,
+    available: false,
+  },
+  {
+    slug: null,
+    name: "视频片段裁剪",
+    desc: "翻译前先剪辑视频片段，无需时间轴编辑器。",
+    badge: "soon",
+    badgeLabel: "即将推出",
+    platform: "macOS",
+    version: null,
+    available: false,
+  },
+];
+
+const principles = [
+  { icon: "🔒", title: "本地优先", desc: "视频默认在本机处理，无强制上传，无需账号。" },
+  { icon: "⚡️", title: "轻量高效", desc: "每款工具只解决一个问题，做好它。无订阅制，无臃肿套件。" },
+  { icon: "🧑‍💻", title: "独立开发", desc: "所有工具由一名开发者构建维护，反馈直达，修复及时。" },
+  { icon: "🆓", title: "完全免费", desc: "所有工具均免费。部分功能可选付费 AI 后端（如 DeepSeek API），但应用本体免费。" },
+];
+---
+
+<Layout title="首页" description="LingYue Tools — 专为 Mac 视频创作者打造的轻量 AI 工具集。字幕转录、翻译、配音、导出，无需订阅，无需账号。">
+  <Nav slot="nav" />
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-eyebrow">专为 Mac 打造的轻量 AI 工具</div>
+      <h1 class="hero-title">
+        精简工具。<br/>
+        <span class="hero-title-accent">强大工作流。</span>
+      </h1>
+      <p class="hero-subtitle">
+        LingYue Tools 是一个专为 Mac 视频创作者打造的工具合集 ——
+        字幕翻译、AI 配音、视频编辑，以及更多。
+        免费下载，无需账号，无需订阅。
+      </p>
+      <div class="hero-actions">
+        <a href="/zh/tools" class="btn btn-primary btn-lg">浏览工具</a>
+        <a href="/zh/download" class="btn btn-outline btn-lg">立即下载</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS GRID -->
+  <section class="section tools-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>工具</h2>
+        <a href="/zh/tools" class="section-header-link">查看全部 →</a>
+      </div>
+      <div class="tools-grid">
+        {tools.map(t => (
+          <div class={`tool-card ${!t.available ? 'tool-card-soon' : ''}`}>
+            <div class="tool-card-top">
+              <div class="tool-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                  <rect width="26" height="26" rx="7" fill="#EEF2FF"/>
+                  <path d="M8 9.5l5.5 3.5-5.5 3.5V9.5z" fill="#4F46E5"/>
+                  <path d="M16 8h1.5M16 13h1.5M16 18h1.5" stroke="#4F46E5" stroke-width="1.25" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class={`badge badge-${t.badge}`}>{t.badgeLabel}</span>
+            </div>
+            <h3 class="tool-card-name">{t.name}</h3>
+            <p class="tool-card-desc">{t.desc}</p>
+            <div class="tool-card-footer">
+              {t.available ? (
+                <a href={`/zh/tools/${t.slug}`} class="tool-card-link">了解详情 →</a>
+              ) : (
+                <span class="tool-card-coming">即将推出</span>
+              )}
+              <span class="tool-card-platform">{t.platform}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="section principles-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>工具设计理念</h2>
+        <p>关于本站所有工具，有几件事是始终成立的。</p>
+      </div>
+      <div class="principles-grid">
+        {principles.map(p => (
+          <div class="principle-card">
+            <div class="principle-icon">{p.icon}</div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED TOOL -->
+  <section class="section featured-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>主推工具</h2>
+      </div>
+      <div class="featured-card">
+        <div class="featured-card-body">
+          <div class="featured-meta">
+            <span class="badge badge-beta">测试版</span>
+            <span class="featured-version">v1.0.0</span>
+          </div>
+          <h3 class="featured-name">AI 翻译配音</h3>
+          <p class="featured-desc">
+            放入任意视频，选择 Whisper 模型进行转录，选择翻译后端（本地 Ollama 或 DeepSeek），
+            导出翻译后的 SRT、MKV 软字幕或硬烧录 MP4。完全在您的 Mac 本机运行。
+          </p>
+          <div class="featured-actions">
+            <a href="/zh/tools/ai-translate-dub" class="btn btn-primary">查看详情</a>
+            <a href="/zh/download" class="btn btn-outline">下载</a>
+          </div>
+        </div>
+        <div class="featured-card-tags">
+          <p class="tags-label">功能标签</p>
+          <div class="tags">
+            <span>Whisper 转录</span>
+            <span>Ollama 本地 AI</span>
+            <span>DeepSeek API</span>
+            <span>SRT 导出</span>
+            <span>MKV 软字幕</span>
+            <span>MP4 硬字幕</span>
+            <span>macOS arm64</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDIE NOTE -->
+  <section class="section">
+    <div class="container">
+      <div class="indie-note">
+        <div class="indie-avatar" aria-hidden="true">👨‍💻</div>
+        <div>
+          <h3>由一位开发者构建</h3>
+          <p>
+            LingYue Tools 是一个个人项目。我构建自己真正需要的工具，然后分享出来。
+            如果您有 Bug 反馈、功能建议，或只是想打个招呼 —— 直接发邮件给我，我会读每一封。
+          </p>
+          <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+            <a href="/zh/about" class="btn btn-outline">关于</a>
+            <a href="mailto:hello@lingyuetools.com" class="btn btn-outline">hello@lingyuetools.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+/* HERO */
+.hero {
+  padding: 6rem 0 5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--color-accent);
+  margin-bottom: 1.25rem;
+}
+.hero-title {
+  max-width: 14ch; margin: 0 auto 1.25rem;
+  line-height: 1.1;
+}
+.hero-title-accent { color: var(--color-accent); }
+.hero-subtitle {
+  max-width: 52ch; margin: 0 auto 2rem;
+  font-size: 1.0625rem; color: var(--color-text-secondary); line-height: 1.7;
+}
+.hero-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+/* SECTION HEADER */
+.section-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 1.75rem; flex-wrap: wrap; gap: 0.5rem;
+}
+.section-header h2 { margin: 0; }
+.section-header p { margin: 0.25rem 0 0; font-size: 0.9375rem; color: var(--color-text-secondary); flex-basis: 100%; }
+.section-header-link { font-size: 0.875rem; color: var(--color-accent); text-decoration: none; font-weight: 600; flex-shrink: 0; }
+.section-header-link:hover { text-decoration: underline; }
+
+/* TOOLS GRID */
+.tools-section {
+  background: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+}
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.tool-card {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 1.4rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.tool-card-soon { opacity: 0.6; }
+.tool-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem; }
+.tool-icon { line-height: 0; }
+.tool-card-name { font-size: 0.9375rem; font-weight: 700; margin: 0; }
+.tool-card-desc { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; flex: 1; }
+.tool-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.75rem; }
+.tool-card-link { font-size: 0.8125rem; font-weight: 600; color: var(--color-accent); text-decoration: none; }
+.tool-card-link:hover { text-decoration: underline; }
+.tool-card-coming { font-size: 0.8125rem; color: var(--color-text-muted); }
+.tool-card-platform { font-size: 0.75rem; color: var(--color-text-muted); }
+
+/* PRINCIPLES */
+.principles-section { border-bottom: 1px solid var(--color-border); }
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.principle-card {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 1.4rem;
+}
+.principle-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.principle-card h3 { font-size: 0.9375rem; margin-bottom: 0.4rem; }
+.principle-card p { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; }
+
+/* FEATURED */
+.featured-section { border-bottom: 1px solid var(--color-border); }
+.featured-card {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: start;
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-sm);
+}
+.featured-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+.featured-version { font-size: 0.8rem; color: var(--color-text-muted); font-weight: 600; }
+.featured-name { font-size: 1.3rem; margin: 0 0 0.6rem; }
+.featured-desc { font-size: 0.9375rem; color: var(--color-text-secondary); max-width: 55ch; line-height: 1.7; margin: 0 0 1.25rem; }
+.featured-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.featured-card-tags { min-width: 180px; }
+.tags-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 0.6rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+.tags span {
+  font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.55rem;
+  border-radius: 4px; background: var(--color-bg-muted);
+  color: var(--color-text-secondary); border: 1px solid var(--color-border);
+}
+
+/* INDIE NOTE */
+.indie-note {
+  display: flex; gap: 1.5rem; align-items: flex-start;
+  max-width: 640px; margin: 0 auto;
+  background: var(--color-bg-subtle); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 2rem;
+}
+.indie-avatar { font-size: 2.5rem; line-height: 1; padding-top: 0.1rem; flex-shrink: 0; }
+.indie-note h3 { margin-bottom: 0.5rem; }
+.indie-note p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.7; }
+
+@media (max-width: 760px) {
+  .featured-card { grid-template-columns: 1fr; }
+  .tags { justify-content: flex-start; }
+}
+@media (max-width: 580px) {
+  .hero { padding: 4rem 0 3.5rem; }
+  .indie-note { flex-direction: column; }
+}
+</style>

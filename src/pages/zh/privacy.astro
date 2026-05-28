@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="隐私政策" description="LingYue Tools 隐私政策 — 使用 AI 翻译配音及访问本站时的数据处理说明。">
+  <Nav slot="nav" />
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>隐私政策</h1>
+      <p class="page-subtitle">最后更新：2026年5月</p>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container prose-layout">
+      <div class="prose">
+
+        <h2>概览</h2>
+        <p>
+          LingYue Tools 是由独立开发者维护的个人工具站。我重视隐私。
+          本页说明在使用 AI 翻译配音 和访问本网站时，数据如何被处理（或不被处理）。
+        </p>
+
+        <h2>视频文件</h2>
+        <p>
+          <strong>您的视频文件默认不上传至任何服务器。</strong>
+          AI 翻译配音 在您的 Mac 本地处理文件。
+          除非您明确选择云端 AI 功能，否则不会有任何视频或音频数据离开您的设备。
+        </p>
+        <p>
+          使用云端 AI 功能时（例如 DeepSeek 翻译），
+          仅字幕文本会发送至第三方 API 服务。
+          应用会在发送前明确提示您。
+        </p>
+
+        <h2>本网站数据收集</h2>
+        <p>
+          本站使用 <strong>Cloudflare Web Analytics</strong> 收集基础匿名流量统计
+          （页面访问量、浏览器类型、地区）。
+          该工具不使用 Cookie，不对用户进行指纹识别，不跨站追踪个人。
+        </p>
+        <p>
+          本站不使用任何其他追踪脚本、广告像素或第三方分析工具。
+        </p>
+
+        <h2>邮件与反馈</h2>
+        <p>
+          如果您通过邮件联系我，我会使用您的消息来改进工具。
+          您的邮件地址仅用于回复您，绝不会被分享或出售给第三方。
+        </p>
+
+        <h2>用户账号</h2>
+        <p>
+          本站没有用户账号、登录或任何注册功能，不创建也不存储任何个人账号。
+        </p>
+
+        <h2>Cookie</h2>
+        <p>
+          本站不使用第一方 Cookie 进行追踪或广告。
+          Cloudflare 可能设置网站传输和安全所需的技术性 Cookie。
+        </p>
+
+        <h2>模型训练</h2>
+        <p>
+          您的视频文件、音频和字幕数据
+          <strong>绝不会被用于训练 AI 模型</strong> —— 无论是我本人还是任何第三方服务。
+        </p>
+
+        <h2>儿童隐私</h2>
+        <p>
+          这些工具不面向 13 岁以下的儿童。我不会故意收集儿童的个人数据。
+        </p>
+
+        <h2>联系方式</h2>
+        <p>
+          如对本隐私政策有疑问，或希望申请删除数据，请发送邮件至：
+          <a href="mailto:hello@lingyuetools.com">hello@lingyuetools.com</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+  .page-hero { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--color-border); }
+  .page-hero h1 { margin-bottom: 0.4rem; }
+  .page-subtitle { color: var(--color-text-muted); font-size: 0.9rem; }
+
+  .prose-layout { max-width: 720px; }
+  .prose h2 { font-size: 1.125rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+  .prose h2:first-child { margin-top: 0; }
+  .prose p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--color-text); }
+  .prose a { color: var(--color-accent); }
+</style>
