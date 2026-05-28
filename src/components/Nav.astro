@@ -1,0 +1,169 @@
+---
+const navLinks = [
+  { href: "/tools", label: "Tools" },
+  { href: "/download", label: "Download" },
+  { href: "/changelog", label: "Changelog" },
+  { href: "/about", label: "About" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-nav">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo" aria-label="Tiny Video Tools home">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <rect width="22" height="22" rx="5" fill="#4F46E5"/>
+        <path d="M7 8.5L11 6L15 8.5V13.5L11 16L7 13.5V8.5Z" fill="white" opacity="0.9"/>
+        <circle cx="11" cy="11" r="2" fill="#4F46E5"/>
+      </svg>
+      <span>Tiny Video Tools</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={["nav-link", { active: currentPath.startsWith(link.href) }]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="nav-actions">
+      <a href="/download" class="btn btn-primary nav-cta">
+        Download Beta
+      </a>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <button class="nav-hamburger" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav class="mobile-nav">
+      {navLinks.map(link => (
+        <a href={link.href} class="mobile-nav-link">{link.label}</a>
+      ))}
+      <a href="/download" class="btn btn-primary" style="margin-top: 0.5rem; justify-content: center;">
+        Download Beta
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu   = document.getElementById('mobileMenu');
+  toggle?.addEventListener('click', () => {
+    const open = !menu?.hidden;
+    menu!.hidden = open;
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.classList.toggle('open', !open);
+  });
+</script>
+
+<style>
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    gap: 2rem;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none !important;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    flex-shrink: 0;
+  }
+  .nav-logo:hover { color: var(--color-accent); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex: 1;
+  }
+
+  .nav-link {
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none !important;
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-link:hover { color: var(--color-text); background: var(--color-bg-muted); }
+  .nav-link.active { color: var(--color-accent); background: var(--color-accent-subtle); }
+
+  .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+  .nav-cta { padding: 0.45rem 1rem; font-size: 0.875rem; }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 6px;
+    margin-left: auto;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-text-secondary);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem 1.25rem;
+  }
+  .mobile-nav-link {
+    padding: 0.6rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none !important;
+    transition: background 0.15s;
+  }
+  .mobile-nav-link:hover { background: var(--color-bg-muted); }
+
+  @media (max-width: 720px) {
+    .nav-links, .nav-actions { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+</style>

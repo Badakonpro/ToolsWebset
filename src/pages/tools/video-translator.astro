@@ -1,0 +1,357 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const features = [
+  "Import MP4 and MOV video files by drag-and-drop",
+  "Auto-transcription powered by Whisper",
+  "Translate subtitles to 50+ languages",
+  "Export translated SRT subtitle files",
+  "Export video with hardcoded (burnt-in) captions",
+  "Runs entirely on your Mac — no account required",
+  "Optimized for Apple Silicon",
+];
+
+const faq = [
+  {
+    q: "Is the app free?",
+    a: "Yes. The current Beta version is completely free to download and use.",
+  },
+  {
+    q: "Does it work on Intel Macs?",
+    a: "Yes. The app supports both Apple Silicon and Intel Macs running macOS 13 (Ventura) or later.",
+  },
+  {
+    q: "Do my videos get uploaded anywhere?",
+    a: "By default, transcription and processing happen locally on your Mac. Some features may optionally use cloud AI services — this will always be clearly indicated before use.",
+  },
+  {
+    q: "Why does macOS show a warning on first launch?",
+    a: "The current Beta is not yet notarized with Apple. Right-click the app icon and choose 'Open' to bypass the warning. Future versions will be fully notarized.",
+  },
+  {
+    q: "Which output subtitle formats are supported?",
+    a: "Currently SRT. More formats (VTT, ASS) are planned for future releases.",
+  },
+  {
+    q: "What languages can it translate to?",
+    a: "50+ languages are supported, including English, Chinese, Japanese, Korean, Spanish, French, German, Portuguese, Arabic, and more.",
+  },
+];
+---
+
+<Layout
+  title="Video Translator for Mac"
+  description="Automatically translate video subtitles on Mac. Drag in MP4 or MOV, choose a language, export SRT or captioned video. No account required."
+>
+  <Nav slot="nav" />
+
+  <!-- PAGE HEADER -->
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div>
+        <div class="breadcrumb">
+          <a href="/tools">Tools</a>
+          <span aria-hidden="true">›</span>
+          <span>Video Translator</span>
+        </div>
+        <div class="tool-title-row">
+          <h1>Video Translator for Mac</h1>
+          <span class="badge badge-beta" style="flex-shrink:0;">v0.1.0 Beta</span>
+        </div>
+        <p class="tool-intro">
+          Drop a video, pick your target language, get a translated subtitle file or
+          a video with burnt-in captions — all on your Mac, no account required.
+        </p>
+        <div class="hero-actions">
+          <a href="/download" class="btn btn-primary btn-lg">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9M4.5 7l3.5 3.5L11.5 7M2 13h12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download Free Beta
+          </a>
+          <a href="/changelog" class="btn btn-outline btn-lg">Changelog</a>
+        </div>
+        <p class="system-req">macOS 13+  ·  Apple Silicon &amp; Intel  ·  ~80 MB download</p>
+      </div>
+
+      <div class="app-preview">
+        <div class="app-preview-window">
+          <div class="window-chrome">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="window-body">
+            <div class="drop-zone">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="6" y="6" width="16" height="16" rx="3" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1.5"/><path d="M14 11v6M11 14l3 3 3-3" stroke="#4F46E5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <p>Drop your video here</p>
+              <p class="drop-hint">MP4 · MOV</p>
+            </div>
+            <div class="lang-row">
+              <span>Translate to</span>
+              <div class="lang-badge">Chinese (Simplified) ▾</div>
+            </div>
+            <div class="export-row">
+              <div class="export-btn active">SRT File</div>
+              <div class="export-btn">Captioned Video</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section">
+    <div class="container">
+      <h2 style="margin-bottom:1.75rem;">What it does</h2>
+      <ul class="feature-list">
+        {features.map(f => (
+          <li class="feature-item">
+            <svg class="check-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#EEF2FF"/><path d="M5.5 9l2.5 2.5 4.5-5" stroke="#4F46E5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {f}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how-it-works-section">
+    <div class="container">
+      <h2 style="margin-bottom:2.5rem;text-align:center;">How it works</h2>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Drop your video</h3>
+            <p>Drag in an MP4 or MOV file. Click the folder icon to browse.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Choose target language</h3>
+            <p>Select from 50+ languages. The app transcribes and translates automatically.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Pick your export format</h3>
+            <p>Export as an SRT subtitle file, or render a new video with captions burned in.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Done</h3>
+            <p>Files saved to your chosen folder, ready to use.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SUPPORTED FORMATS -->
+  <section class="section">
+    <div class="container">
+      <h2 style="margin-bottom:1.5rem;">Supported formats</h2>
+      <div class="format-table">
+        <div class="format-row format-row--header">
+          <span>Category</span><span>Supported</span>
+        </div>
+        <div class="format-row">
+          <span>Video input</span><span>MP4, MOV</span>
+        </div>
+        <div class="format-row">
+          <span>Subtitle output</span><span>SRT</span>
+        </div>
+        <div class="format-row">
+          <span>Video output</span><span>MP4 with hardcoded captions</span>
+        </div>
+        <div class="format-row">
+          <span>macOS</span><span>Ventura (13) and later</span>
+        </div>
+        <div class="format-row">
+          <span>Architecture</span><span>Apple Silicon · Intel (Rosetta)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section">
+    <div class="container">
+      <h2 style="margin-bottom:2rem;">Frequently asked questions</h2>
+      <dl class="faq">
+        {faq.map(item => (
+          <div class="faq-item">
+            <dt>{item.q}</dt>
+            <dd>{item.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background:var(--color-bg-subtle);border-top:1px solid var(--color-border);">
+    <div class="container" style="text-align:center;max-width:520px;">
+      <h2>Download and try it free</h2>
+      <p style="margin:0.75rem 0 1.75rem;color:var(--color-text-secondary);">
+        No sign-up. No payment. Just download, open, and start translating.
+      </p>
+      <a href="/download" class="btn btn-primary btn-lg">Download Beta for Mac</a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .page-hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+  .breadcrumb a { color: var(--color-text-secondary); text-decoration: none !important; }
+  .breadcrumb a:hover { color: var(--color-accent); }
+
+  .tool-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .tool-intro {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    max-width: 52ch;
+    margin-bottom: 1.75rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .system-req { margin-top: 0.9rem; font-size: 0.8125rem; color: var(--color-text-muted); }
+
+  /* App preview mock */
+  .app-preview { flex-shrink: 0; }
+  .app-preview-window {
+    width: 260px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-bg);
+  }
+  .window-chrome {
+    display: flex; gap: 6px; align-items: center;
+    padding: 10px 12px;
+    background: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .window-chrome span {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--color-border-strong);
+  }
+  .window-chrome span:nth-child(1) { background: #FC6058; }
+  .window-chrome span:nth-child(2) { background: #FEC02F; }
+  .window-chrome span:nth-child(3) { background: #2ACA44; }
+  .window-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+  .drop-zone {
+    border: 1.5px dashed var(--color-accent);
+    border-radius: var(--radius-md);
+    background: var(--color-accent-subtle);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .drop-zone p { font-size: 0.8125rem; font-weight: 600; color: var(--color-accent); }
+  .drop-hint { font-size: 0.7rem !important; color: var(--color-text-muted) !important; font-weight: 400 !important; }
+  .lang-row {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.8rem; color: var(--color-text-secondary);
+  }
+  .lang-badge {
+    font-size: 0.75rem; font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-muted);
+    color: var(--color-text);
+  }
+  .export-row { display: flex; gap: 0.5rem; }
+  .export-btn {
+    flex: 1; text-align: center;
+    font-size: 0.75rem; font-weight: 600;
+    padding: 0.35rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-muted);
+    color: var(--color-text-secondary);
+  }
+  .export-btn.active {
+    border-color: var(--color-accent);
+    background: var(--color-accent-subtle);
+    color: var(--color-accent);
+  }
+
+  /* Features */
+  .feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; max-width: 560px; }
+  .feature-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9375rem; color: var(--color-text-secondary); }
+  .check-icon { flex-shrink: 0; }
+
+  /* How it works */
+  .how-it-works-section { background: var(--color-bg-subtle); border-top: 1px solid var(--color-border); }
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; max-width: 520px; margin: 0 auto; }
+  .step { display: flex; gap: 1.25rem; align-items: flex-start; }
+  .step-num {
+    flex-shrink: 0;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.875rem; font-weight: 700;
+  }
+  .step h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+  .step p { font-size: 0.9rem; color: var(--color-text-secondary); }
+
+  /* Format table */
+  .format-table { border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; max-width: 540px; }
+  .format-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0.75rem 1.1rem; font-size: 0.875rem; border-bottom: 1px solid var(--color-border); }
+  .format-row:last-child { border-bottom: none; }
+  .format-row--header { background: var(--color-bg-subtle); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); }
+  .format-row span:last-child { color: var(--color-text-secondary); }
+
+  /* FAQ */
+  .faq-section { border-top: 1px solid var(--color-border); }
+  .faq { display: flex; flex-direction: column; gap: 0; max-width: 660px; }
+  .faq-item { padding: 1.3rem 0; border-bottom: 1px solid var(--color-border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item dt { font-weight: 700; font-size: 0.9375rem; margin-bottom: 0.4rem; }
+  .faq-item dd { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7; }
+
+  @media (max-width: 860px) {
+    .page-hero-inner { grid-template-columns: 1fr; }
+    .app-preview { display: none; }
+  }
+</style>

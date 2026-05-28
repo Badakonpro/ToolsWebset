@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const tools = [
+  {
+    name: "Video Translator for Mac",
+    slug: "video-translator",
+    tagline: "Translate video subtitles automatically. Export SRT or captioned video.",
+    status: "available",
+    version: "v0.1.0 Beta",
+    formats: ["MP4", "MOV"],
+    icon: "🎬",
+  },
+  {
+    name: "SRT Translator",
+    slug: null,
+    tagline: "Upload an SRT file, get it translated to any language.",
+    status: "coming-soon",
+    icon: "💬",
+  },
+  {
+    name: "Subtitle Burner",
+    slug: null,
+    tagline: "Hardcode any SRT file into a video with one click.",
+    status: "coming-soon",
+    icon: "🔥",
+  },
+  {
+    name: "Audio Transcriber",
+    slug: null,
+    tagline: "Convert audio recordings to text. Export as TXT or SRT.",
+    status: "coming-soon",
+    icon: "🎙",
+  },
+  {
+    name: "Video Compressor",
+    slug: null,
+    tagline: "Compress videos for web, social, or storage — without quality loss.",
+    status: "coming-soon",
+    icon: "📦",
+  },
+];
+---
+
+<Layout title="Tools" description="All lightweight AI video tools by Tiny Video Tools. Translate subtitles, burn captions, transcribe audio, and more on Mac.">
+  <Nav slot="nav" />
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Tools</h1>
+      <p class="page-subtitle">
+        Each tool solves one specific problem. Small, fast, local-first.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <div class="tools-grid">
+        {tools.map(tool => (
+          <div class:list={["tool-card", { "tool-card--available": tool.status === "available" }]}>
+            <div class="tool-card-header">
+              <span class="tool-card-icon">{tool.icon}</span>
+              <div class="tool-card-badges">
+                {tool.status === "available" && (
+                  <span class="badge badge-beta">{tool.version}</span>
+                )}
+                {tool.status === "coming-soon" && (
+                  <span class="badge badge-soon">Coming Soon</span>
+                )}
+              </div>
+            </div>
+            <h3 class="tool-card-name">{tool.name}</h3>
+            <p class="tool-card-tagline">{tool.tagline}</p>
+            {tool.formats && (
+              <div class="tool-card-formats">
+                {tool.formats.map(f => <span>{f}</span>)}
+              </div>
+            )}
+            {tool.slug ? (
+              <div class="tool-card-actions">
+                <a href={`/tools/${tool.slug}`} class="btn btn-primary">Learn More</a>
+                <a href="/download" class="btn btn-outline">Download</a>
+              </div>
+            ) : (
+              <p class="tool-card-soon-note">In development — check back later.</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 4rem 0 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .page-hero h1 { margin-bottom: 0.6rem; }
+  .page-subtitle {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    max-width: 48ch;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .tool-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 0.7;
+    transition: box-shadow 0.2s, border-color 0.2s, opacity 0.2s;
+  }
+  .tool-card--available {
+    opacity: 1;
+    border-color: var(--color-border);
+  }
+  .tool-card--available:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-strong);
+  }
+
+  .tool-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+  .tool-card-icon { font-size: 1.6rem; line-height: 1; }
+  .tool-card-name { font-size: 1.05rem; font-weight: 700; }
+  .tool-card-tagline { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; flex: 1; }
+  .tool-card-formats {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+  .tool-card-formats span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    background: var(--color-bg-muted);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .tool-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .tool-card-actions .btn {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.875rem;
+  }
+  .tool-card-soon-note {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>

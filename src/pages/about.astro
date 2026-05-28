@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="About" description="About Tiny Video Tools — a personal tools site built by an independent developer.">
+  <Nav slot="nav" />
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>About</h1>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container about-layout">
+      <div class="about-main prose">
+
+        <h2>What is this?</h2>
+        <p>
+          Tiny Video Tools is a personal tools site where I publish small utilities
+          I've built for myself — mostly around video, subtitles, AI, and Mac workflows.
+        </p>
+        <p>
+          Everything here is made by one person. No team, no investors, no company backing.
+          Just tools that I find useful and wanted to share.
+        </p>
+
+        <h2>The current tool</h2>
+        <p>
+          The first tool is <strong>Video Translator for Mac</strong> — it lets you drop in
+          a video, pick a target language, and export a translated SRT file or a video with
+          burnt-in captions. I built it because I kept needing to subtitle videos for
+          different audiences and wanted something that ran locally without accounts or
+          subscriptions.
+        </p>
+
+        <h2>What's coming</h2>
+        <p>
+          I plan to keep adding small, focused tools — subtitle burning, audio transcription,
+          video compression, SRT translation, and more. Each tool will solve one specific
+          problem and stay as lightweight as possible.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          If you have a bug report, feature request, or just want to say hello:
+        </p>
+        <p>
+          📧 <a href="mailto:hello@tinyvideotools.com">hello@tinyvideotools.com</a>
+        </p>
+        <p>
+          I read every email and usually reply within a day or two.
+        </p>
+
+      </div>
+
+      <aside class="about-sidebar">
+        <div class="sidebar-card">
+          <div class="dev-avatar">👨‍💻</div>
+          <p class="dev-label">Independent developer</p>
+          <p class="dev-note">Building small tools, one problem at a time.</p>
+          <hr style="border-top:1px solid var(--color-border);margin:1rem 0;" />
+          <div class="dev-links">
+            <a href="mailto:hello@tinyvideotools.com">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="3" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.25"/><path d="M1 4l6 4 6-4" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>
+              Email
+            </a>
+            <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <p class="sidebar-card-title">Privacy</p>
+          <p>Tools run locally. No tracking. No account required.</p>
+          <a href="/privacy" class="sidebar-link">Privacy Policy →</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+  .page-hero { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--color-border); }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-sidebar { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 80px; }
+
+  .sidebar-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+  .sidebar-card-title { font-weight: 700; font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.35rem; }
+  .sidebar-link { display: inline-block; margin-top: 0.6rem; font-size: 0.875rem; color: var(--color-accent); }
+
+  .dev-avatar { font-size: 2.5rem; text-align: center; margin-bottom: 0.75rem; }
+  .dev-label { font-weight: 700; font-size: 0.875rem; color: var(--color-text); text-align: center; }
+  .dev-note { font-size: 0.8125rem; color: var(--color-text-muted); text-align: center; margin-top: 0.25rem; }
+  .dev-links { display: flex; flex-direction: column; gap: 0.5rem; }
+  .dev-links a {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: var(--color-text-secondary);
+    text-decoration: none !important;
+    padding: 0.35rem 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s, color 0.15s;
+  }
+  .dev-links a:hover { background: var(--color-bg-muted); color: var(--color-text); }
+
+  @media (max-width: 720px) {
+    .about-layout { grid-template-columns: 1fr; }
+    .about-sidebar { order: -1; position: static; }
+  }
+</style>
