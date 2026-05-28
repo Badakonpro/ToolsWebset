@@ -3,167 +3,191 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
-const features = [
+const tools = [
   {
-    icon: "🎬",
-    title: "AI translation in one click",
-    desc: "Drop in a video. AI transcribes the speech, translates the dialogue, and delivers a subtitle file or dubbed audio — automatically.",
+    slug: "ai-translate-dub",
+    name: "AI Translate & Dub",
+    desc: "Transcribe video with Whisper, translate subtitles via Ollama or DeepSeek, export SRT, MKV, or hard-burned MP4.",
+    badge: "beta",
+    badgeLabel: "Beta",
+    platform: "macOS arm64",
+    version: "v1.0.0",
+    available: true,
   },
   {
-    icon: "🎙",
-    title: "AI voice dubbing",
-    desc: "Replace the original audio with natural-sounding AI voices in your target language. No recording studio needed.",
+    slug: null,
+    name: "Batch Subtitle Export",
+    desc: "Translate and export subtitles for multiple videos at once.",
+    badge: "soon",
+    badgeLabel: "Soon",
+    platform: "macOS",
+    version: null,
+    available: false,
   },
   {
-    icon: "🖥",
-    title: "Runs locally on Mac",
-    desc: "No account, no cloud upload by default. Your videos stay on your machine unless you opt in to AI services.",
+    slug: null,
+    name: "Audio Dubbing Studio",
+    desc: "Multi-speaker AI dubbing with voice matching.",
+    badge: "soon",
+    badgeLabel: "Soon",
+    platform: "macOS",
+    version: null,
+    available: false,
   },
   {
-    icon: "⚡️",
-    title: "Fast and lightweight",
-    desc: "Optimized for Apple Silicon. Processes most videos in a fraction of the time compared to browser-based tools.",
+    slug: null,
+    name: "Clip Trimmer",
+    desc: "Cut and trim clips before translation — no timeline editor needed.",
+    badge: "soon",
+    badgeLabel: "Soon",
+    platform: "macOS",
+    version: null,
+    available: false,
   },
 ];
 
-const useCases = [
-  { emoji: "📹", text: "YouTubers dubbing videos for foreign audiences" },
-  { emoji: "📱", text: "Reels & TikTok creators going multilingual" },
-  { emoji: "🎓", text: "Course creators localizing lecture recordings" },
-  { emoji: "🎙", text: "Podcasters dubbing audio exports" },
-  { emoji: "🌏", text: "Anyone sharing content across language barriers" },
+const principles = [
+  { icon: "🔒", title: "Local-first", desc: "Your videos stay on your machine by default. No forced cloud uploads, no account required." },
+  { icon: "⚡️", title: "Lightweight & fast", desc: "Each tool solves one problem and does it well. No subscription apps, no bloated suites." },
+  { icon: "🧑‍💻", title: "Made by one person", desc: "Every tool is built and maintained by a single developer. Direct feedback, direct fixes." },
+  { icon: "🆓", title: "Free to download", desc: "All tools are free. Some may have optional paid AI backends (e.g. DeepSeek API), but the app itself is free." },
 ];
 ---
 
-<Layout title="Home" description="LingYue Tools — AI video translation and dubbing for Mac. Translate subtitles, generate SRT, and dub videos in 50+ languages.">
+<Layout title="Home" description="LingYue Tools — lightweight AI tools for video creators on Mac. Transcribe, translate, dub, and export — no subscription, no account.">
   <Nav slot="nav" />
 
   <!-- HERO -->
   <section class="hero">
     <div class="container hero-inner">
-      <div class="hero-badge">
-        <span class="badge badge-beta">Beta</span>
-        <span class="hero-badge-text">AI Translate & Dub for Mac is now available</span>
-      </div>
+      <div class="hero-eyebrow">Lightweight AI tools for Mac</div>
       <h1 class="hero-title">
-        AI video translation
-        <span class="hero-title-accent"> & dubbing</span>
+        Small tools.<br/>
+        <span class="hero-title-accent">Big workflows.</span>
       </h1>
       <p class="hero-subtitle">
-        Translate subtitles and dub your videos into 50+ languages — all on your Mac.
-        No account required.
+        LingYue Tools is a personal collection of focused Mac apps for video creators —
+        subtitle translation, AI dubbing, clip editing, and more.
+        No subscription. No account. Just download and run.
       </p>
       <div class="hero-actions">
-        <a href="/download" class="btn btn-primary btn-lg">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9M4.5 7l3.5 3.5L11.5 7M2 13h12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download Beta — Free
-        </a>
-        <a href="/changelog" class="btn btn-outline btn-lg">View Changelog</a>
+        <a href="/tools" class="btn btn-primary btn-lg">Browse Tools</a>
+        <a href="/download" class="btn btn-outline btn-lg">Download Now</a>
       </div>
-      <p class="hero-hint">macOS 13+  ·  Apple Silicon recommended  ·  Intel supported</p>
     </div>
   </section>
 
-  <!-- MAIN TOOL CARD -->
-  <section class="section-sm tool-spotlight-section">
+  <!-- TOOLS GRID -->
+  <section class="section tools-section">
     <div class="container">
-      <div class="tool-spotlight">
-        <div class="tool-spotlight-icon">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-            <rect width="36" height="36" rx="10" fill="#EEF2FF"/>
-            <path d="M12 13l7 5-7 5V13z" fill="#4F46E5"/>
-            <path d="M22 10h2M22 15h2M22 20h2M22 25h2" stroke="#4F46E5" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="tool-spotlight-body">
-          <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
-            <h2 class="tool-spotlight-name">AI Translate & Dub</h2>
-            <span class="badge badge-beta">Beta</span>
+      <div class="section-header">
+        <h2>Tools</h2>
+        <a href="/tools" class="section-header-link">View all →</a>
+      </div>
+      <div class="tools-grid">
+        {tools.map(t => (
+          <div class={`tool-card ${!t.available ? 'tool-card-soon' : ''}`}>
+            <div class="tool-card-top">
+              <div class="tool-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                  <rect width="26" height="26" rx="7" fill="#EEF2FF"/>
+                  <path d="M8 9.5l5.5 3.5-5.5 3.5V9.5z" fill="#4F46E5"/>
+                  <path d="M16 8h1.5M16 13h1.5M16 18h1.5" stroke="#4F46E5" stroke-width="1.25" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class={`badge badge-${t.badge}`}>{t.badgeLabel}</span>
+            </div>
+            <h3 class="tool-card-name">{t.name}</h3>
+            <p class="tool-card-desc">{t.desc}</p>
+            <div class="tool-card-footer">
+              {t.available ? (
+                <a href={`/tools/${t.slug}`} class="tool-card-link">Learn more →</a>
+              ) : (
+                <span class="tool-card-coming">Coming soon</span>
+              )}
+              <span class="tool-card-platform">{t.platform}</span>
+            </div>
           </div>
-          <p class="tool-spotlight-desc">
-            Drop in a video, pick your target language — get a translated SRT file,
-            a captioned video, or a fully dubbed version with AI voices. All on your Mac.
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="section principles-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>How these tools work</h2>
+        <p>A few things that are true about every tool on this site.</p>
+      </div>
+      <div class="principles-grid">
+        {principles.map(p => (
+          <div class="principle-card">
+            <div class="principle-icon">{p.icon}</div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED TOOL -->
+  <section class="section featured-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured right now</h2>
+      </div>
+      <div class="featured-card">
+        <div class="featured-card-body">
+          <div class="featured-meta">
+            <span class="badge badge-beta">Beta</span>
+            <span class="featured-version">v1.0.0</span>
+          </div>
+          <h3 class="featured-name">AI Translate &amp; Dub</h3>
+          <p class="featured-desc">
+            Drop in any video, pick a Whisper model for transcription, choose a translation
+            backend (local Ollama or DeepSeek), and export a translated SRT, MKV soft-sub,
+            or MP4 with baked-in subtitles. Runs entirely on your Mac.
           </p>
-          <div class="tool-spotlight-actions">
-            <a href="/tools/ai-translate-dub" class="btn btn-primary">Learn More</a>
+          <div class="featured-actions">
+            <a href="/tools/ai-translate-dub" class="btn btn-primary">See Details</a>
             <a href="/download" class="btn btn-outline">Download</a>
           </div>
         </div>
-        <div class="tool-spotlight-formats">
-          <p class="formats-label">Supports</p>
-          <div class="formats-tags">
-            <span>MP4</span><span>MOV</span><span>SRT out</span><span>AI dubbing</span>
+        <div class="featured-card-tags">
+          <p class="tags-label">What it does</p>
+          <div class="tags">
+            <span>Whisper transcription</span>
+            <span>Ollama local AI</span>
+            <span>DeepSeek API</span>
+            <span>SRT export</span>
+            <span>MKV soft-sub</span>
+            <span>MP4 hard-sub</span>
+            <span>macOS arm64</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Everything you need, nothing you don't</h2>
-        <p>No subscriptions, no cloud upload by default, no bloated UI.</p>
-      </div>
-      <div class="features-grid">
-        {features.map(f => (
-          <div class="feature-card">
-            <div class="feature-icon">{f.icon}</div>
-            <h3>{f.title}</h3>
-            <p>{f.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- USE CASES -->
-  <section class="section use-cases-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Who is this for?</h2>
-        <p>Built for people who make and share video content.</p>
-      </div>
-      <ul class="use-cases">
-        {useCases.map(u => (
-          <li class="use-case-item">
-            <span class="use-case-emoji">{u.emoji}</span>
-            <span>{u.text}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <!-- INDIE DEV NOTE -->
+  <!-- INDIE NOTE -->
   <section class="section">
     <div class="container">
       <div class="indie-note">
-        <div class="indie-note-avatar" aria-hidden="true">👨‍💻</div>
+        <div class="indie-avatar" aria-hidden="true">👨‍💻</div>
         <div>
           <h3>Built by one developer</h3>
           <p>
-            LingYue Tools is a personal tools site maintained by a single independent developer.
-            If you run into a bug or have a feature request, just send me an email —
-            I read every message.
+            LingYue Tools is a side project. I build tools I actually need, then share them.
+            If you have a bug, a feature idea, or just want to say hello — email me directly.
+            I read everything.
           </p>
-          <a href="/about" class="btn btn-outline" style="margin-top: 1rem;">About the Developer</a>
+          <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+            <a href="/about" class="btn btn-outline">About</a>
+            <a href="mailto:hello@lingyuetools.com" class="btn btn-outline">hello@lingyuetools.com</a>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA STRIP -->
-  <section class="cta-strip">
-    <div class="container cta-strip-inner">
-      <div>
-        <h2>Try it today — it's free</h2>
-        <p>Current version: v0.1.0 Beta · macOS 13 or later required.</p>
-      </div>
-      <div class="cta-strip-actions">
-        <a href="/download" class="btn btn-primary btn-lg">Download Beta</a>
-        <a href="/tools/ai-translate-dub" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.35);">See Full Details</a>
       </div>
     </div>
   </section>
@@ -172,94 +196,119 @@ const useCases = [
 </Layout>
 
 <style>
-.hero { padding: 6rem 0 5rem; text-align: center; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  margin-bottom: 1.5rem; padding: 0.3rem 0.75rem 0.3rem 0.45rem;
-  border: 1px solid var(--color-border); border-radius: 999px;
-  background: var(--color-bg-subtle);
-}
-.hero-badge-text { font-size: 0.8125rem; color: var(--color-text-secondary); font-weight: 500; }
-.hero-title { max-width: 18ch; margin: 0 auto 1.25rem; }
-.hero-title-accent { color: var(--color-accent); }
-.hero-subtitle {
-  max-width: 48ch; margin: 0 auto 2rem;
-  font-size: 1.0625rem; color: var(--color-text-secondary);
-}
-.hero-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-.hero-hint { margin-top: 1rem; font-size: 0.8125rem; color: var(--color-text-muted); }
-
-.tool-spotlight-section {
-  background: var(--color-bg-subtle);
-  border-top: 1px solid var(--color-border);
+/* HERO */
+.hero {
+  padding: 6rem 0 5rem;
+  text-align: center;
   border-bottom: 1px solid var(--color-border);
 }
-.tool-spotlight {
-  display: grid; grid-template-columns: auto 1fr auto;
-  gap: 1.5rem; align-items: start;
-  background: var(--color-bg); border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-sm);
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--color-accent);
+  margin-bottom: 1.25rem;
 }
-.tool-spotlight-icon { padding-top: 0.2rem; }
-.tool-spotlight-name { font-size: 1.2rem; }
-.tool-spotlight-desc { margin: 0.5rem 0 0; color: var(--color-text-secondary); font-size: 0.9375rem; max-width: 55ch; }
-.tool-spotlight-actions { display: flex; gap: 0.6rem; margin-top: 1.1rem; flex-wrap: wrap; }
-.tool-spotlight-formats { text-align: right; padding-top: 0.2rem; }
-.formats-label { font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-.formats-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
-.formats-tags span {
+.hero-title {
+  max-width: 14ch; margin: 0 auto 1.25rem;
+  line-height: 1.1;
+}
+.hero-title-accent { color: var(--color-accent); }
+.hero-subtitle {
+  max-width: 52ch; margin: 0 auto 2rem;
+  font-size: 1.0625rem; color: var(--color-text-secondary); line-height: 1.7;
+}
+.hero-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+/* SECTION HEADER */
+.section-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 1.75rem; flex-wrap: wrap; gap: 0.5rem;
+}
+.section-header h2 { margin: 0; }
+.section-header p { margin: 0.25rem 0 0; font-size: 0.9375rem; color: var(--color-text-secondary); flex-basis: 100%; }
+.section-header-link { font-size: 0.875rem; color: var(--color-accent); text-decoration: none; font-weight: 600; flex-shrink: 0; }
+.section-header-link:hover { text-decoration: underline; }
+
+/* TOOLS GRID */
+.tools-section {
+  background: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+}
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.tool-card {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 1.4rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.tool-card-soon { opacity: 0.6; }
+.tool-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem; }
+.tool-icon { line-height: 0; }
+.tool-card-name { font-size: 0.9375rem; font-weight: 700; margin: 0; }
+.tool-card-desc { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; flex: 1; }
+.tool-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.75rem; }
+.tool-card-link { font-size: 0.8125rem; font-weight: 600; color: var(--color-accent); text-decoration: none; }
+.tool-card-link:hover { text-decoration: underline; }
+.tool-card-coming { font-size: 0.8125rem; color: var(--color-text-muted); }
+.tool-card-platform { font-size: 0.75rem; color: var(--color-text-muted); }
+
+/* PRINCIPLES */
+.principles-section { border-bottom: 1px solid var(--color-border); }
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.principle-card {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 1.4rem;
+}
+.principle-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.principle-card h3 { font-size: 0.9375rem; margin-bottom: 0.4rem; }
+.principle-card p { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; }
+
+/* FEATURED */
+.featured-section { border-bottom: 1px solid var(--color-border); }
+.featured-card {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: start;
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-sm);
+}
+.featured-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+.featured-version { font-size: 0.8rem; color: var(--color-text-muted); font-weight: 600; }
+.featured-name { font-size: 1.3rem; margin: 0 0 0.6rem; }
+.featured-desc { font-size: 0.9375rem; color: var(--color-text-secondary); max-width: 55ch; line-height: 1.7; margin: 0 0 1.25rem; }
+.featured-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.featured-card-tags { min-width: 180px; }
+.tags-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 0.6rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+.tags span {
   font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.55rem;
   border-radius: 4px; background: var(--color-bg-muted);
   color: var(--color-text-secondary); border: 1px solid var(--color-border);
 }
 
-.section-header { text-align: center; margin-bottom: 3rem; }
-.section-header p { margin-top: 0.6rem; font-size: 1rem; color: var(--color-text-secondary); }
-
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
-.feature-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; }
-.feature-icon { font-size: 1.75rem; margin-bottom: 0.9rem; }
-.feature-card h3 { margin-bottom: 0.45rem; font-size: 1rem; }
-.feature-card p { font-size: 0.9rem; color: var(--color-text-secondary); }
-
-.use-cases-section { background: var(--color-bg-subtle); border-top: 1px solid var(--color-border); }
-.use-cases { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.75rem; max-width: 760px; margin: 0 auto; }
-.use-case-item {
-  display: flex; align-items: center; gap: 0.75rem;
-  padding: 0.85rem 1.1rem; background: var(--color-bg);
-  border: 1px solid var(--color-border); border-radius: var(--radius-md);
-  font-size: 0.9375rem; color: var(--color-text-secondary);
-}
-.use-case-emoji { font-size: 1.2rem; flex-shrink: 0; }
-
+/* INDIE NOTE */
 .indie-note {
   display: flex; gap: 1.5rem; align-items: flex-start;
-  max-width: 620px; margin: 0 auto;
+  max-width: 640px; margin: 0 auto;
   background: var(--color-bg-subtle); border: 1px solid var(--color-border);
   border-radius: var(--radius-lg); padding: 2rem;
 }
-.indie-note-avatar { font-size: 2.5rem; line-height: 1; padding-top: 0.1rem; }
+.indie-avatar { font-size: 2.5rem; line-height: 1; padding-top: 0.1rem; flex-shrink: 0; }
 .indie-note h3 { margin-bottom: 0.5rem; }
-.indie-note p { font-size: 0.9375rem; color: var(--color-text-secondary); }
+.indie-note p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.7; }
 
-.cta-strip { background: var(--color-accent); padding: 4rem 0; }
-.cta-strip-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-.cta-strip h2 { color: #fff; }
-.cta-strip p { color: rgba(255,255,255,0.75); margin-top: 0.35rem; font-size: 0.9375rem; }
-.cta-strip-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-.cta-strip .btn-primary { background: #fff; color: var(--color-accent); border-color: #fff; }
-.cta-strip .btn-primary:hover { background: #F0F0FF; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
-
-@media (max-width: 860px) {
-  .tool-spotlight { grid-template-columns: auto 1fr; }
-  .tool-spotlight-formats { grid-column: 1 / -1; text-align: left; }
-  .formats-tags { justify-content: flex-start; }
+@media (max-width: 760px) {
+  .featured-card { grid-template-columns: 1fr; }
+  .tags { justify-content: flex-start; }
 }
-@media (max-width: 600px) {
+@media (max-width: 580px) {
   .hero { padding: 4rem 0 3.5rem; }
-  .tool-spotlight { grid-template-columns: 1fr; }
-  .tool-spotlight-icon { display: none; }
-  .cta-strip-inner { flex-direction: column; align-items: flex-start; }
   .indie-note { flex-direction: column; }
 }
 </style>
