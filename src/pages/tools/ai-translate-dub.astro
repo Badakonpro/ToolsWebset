@@ -39,7 +39,7 @@ const features = [
 ];
 
 const steps = [
-  { n: "01", title: "Install the app", desc: "Download the DMG, drag to Applications, and launch. App starts a local Gradio server automatically." },
+  { n: "01", title: "Install the app", desc: "Download the DMG, drag AI Translate & Dub to Applications, and launch. The app starts a local Gradio server — your browser opens http://127.0.0.1:7860 automatically." },
   { n: "02", title: "Upload your video", desc: "Drop any MP4 or MOV into the Gradio UI. Audio is extracted at 16 kHz mono." },
   { n: "03", title: "Pick a Whisper model", desc: "Select tiny → large depending on your accuracy and speed needs. Model downloads once, then caches locally." },
   { n: "04", title: "Choose a translation backend", desc: "Connect to a running Ollama instance or enter your DeepSeek API key." },
@@ -205,6 +205,10 @@ const steps = [
         <div class="faq-item">
           <dt>Is Intel Mac supported?</dt>
           <dd>The current DMG is arm64 only. Intel support may be added in a future release. You can run from source on Intel now.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>Where are Whisper models stored?</dt>
+          <dd>Models are cached to <code>~/Library/Application Support/AI翻译配音/whisper-models</code>. If you have existing models in <code>~/.cache/whisper</code>, they are copied over automatically on first launch.</dd>
         </div>
         <div class="faq-item">
           <dt>Is it free?</dt>
