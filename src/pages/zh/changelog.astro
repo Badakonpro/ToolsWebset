@@ -5,11 +5,26 @@ import Footer from '../../components/Footer.astro';
 
 const entries = [
   {
+    version: "v1.3.1",
+    date: "2026-05-29",
+    badge: "badge-beta",
+    badgeLabel: "测试版",
+    tool: "VoxOver",
+    highlights: [
+      "应用更名为 VoxOver",
+      "新增 OpenAI 翻译后端（支持自定义 Base URL，兼容所有 OpenAI 格式 API）",
+      "新增 Anthropic 翻译后端（Claude 系列模型）",
+      "OpenAI 支持一键拉取模型列表",
+      "设置页面新增 OpenAI / Anthropic 配置区块",
+    ],
+    releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.3.1",
+  },
+  {
     version: "v1.0.0",
     date: "2026-05-28",
     badge: "badge-beta",
     badgeLabel: "测试版",
-    tool: "AI 翻译配音",
+    tool: "VoxOver",
     highlights: [
       "首个公开发布版本",
       "Whisper 转录，支持 tiny/base/small/medium/large 模型",
@@ -27,7 +42,7 @@ const entries = [
 ];
 ---
 
-<Layout title="更新日志" description="LingYue Tools 更新日志 — AI 翻译配音及所有工具的版本历史。">
+<Layout title="更新日志" description="LingYue Tools 更新日志 — VoxOver 及所有工具的版本历史。">
   <Nav slot="nav" />
 
   <section class="section">

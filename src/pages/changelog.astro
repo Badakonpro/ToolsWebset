@@ -5,11 +5,26 @@ import Footer from '../components/Footer.astro';
 
 const entries = [
   {
+    version: "v1.3.1",
+    date: "2026-05-29",
+    badge: "badge-beta",
+    badgeLabel: "Beta",
+    tool: "VoxOver",
+    highlights: [
+      "App renamed to VoxOver",
+      "New OpenAI translation backend (custom Base URL supported, compatible with all OpenAI-format APIs)",
+      "New Anthropic translation backend (Claude series models)",
+      "OpenAI supports one-click model list fetching",
+      "Settings page: new OpenAI / Anthropic configuration sections",
+    ],
+    releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.3.1",
+  },
+  {
     version: "v1.0.0",
     date: "2026-05-28",
     badge: "badge-beta",
     badgeLabel: "Beta",
-    tool: "AI Translate & Dub",
+    tool: "VoxOver",
     highlights: [
       "First public release",
       "Whisper transcription with tiny/base/small/medium/large model support",
@@ -27,7 +42,7 @@ const entries = [
 ];
 ---
 
-<Layout title="Changelog" description="LingYue Tools changelog — version history for AI Translate & Dub and all tools.">
+<Layout title="Changelog" description="LingYue Tools changelog — version history for VoxOver and all tools.">
   <Nav slot="nav" />
 
   <section class="section">

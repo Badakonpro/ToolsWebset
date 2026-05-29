@@ -5,34 +5,34 @@ import Footer from '../components/Footer.astro';
 
 const releases = [
   {
-    tool: "AI Translate & Dub",
-    version: "v1.0.0",
-    date: "2026-05-28",
+    tool: "VoxOver",
+    version: "v1.3.1",
+    date: "2026-05-29",
     badge: "badge-beta",
     badgeLabel: "Beta",
     assets: [
       {
         label: "macOS (Apple Silicon)",
-        filename: "AI-Translate-Dub-1.0.0-arm64.dmg",
-        url: "https://github.com/Badakonpro/ai-translate-dub/releases/download/v1.0.0/AI-Translate-Dub-1.0.0-arm64.dmg",
+        filename: "VoxOver-1.3.1-arm64.dmg",
+        url: "https://github.com/Badakonpro/ai-translate-dub/releases/download/v1.3.1/VoxOver-1.3.1-arm64.dmg",
         size: "~112 MB",
         icon: "💻",
       },
     ],
     notes: [
-      "Open the DMG and drag AI Translate & Dub to your Applications folder, then launch it",
+      "Open the DMG and drag VoxOver to your Applications folder, then launch it",
       "The app starts a local Gradio server automatically — open http://127.0.0.1:7860 in your browser if it doesn't open automatically",
       "Install Python dependencies: pip install -r requirements.txt  (requires Python 3)",
       "Install ffmpeg: brew install ffmpeg",
       "Ollama backend: start Ollama, then pull a model from inside the app (e.g. qwen3:latest)",
-      "DeepSeek backend: enter your DeepSeek API key in the app settings — no local GPU required",
+      "DeepSeek / OpenAI / Anthropic: enter your API key in Settings — OpenAI supports custom Base URL",
     ],
-    releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.0.0",
+    releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.3.1",
   },
 ];
 ---
 
-<Layout title="Download" description="Download LingYue Tools apps. AI Translate & Dub — free macOS app for video transcription and subtitle translation.">
+<Layout title="Download" description="Download LingYue Tools apps. VoxOver — free macOS app for video transcription and subtitle translation.">
   <Nav slot="nav" />
 
   <section class="section">

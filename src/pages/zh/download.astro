@@ -5,34 +5,34 @@ import Footer from '../../components/Footer.astro';
 
 const releases = [
   {
-    tool: "AI 翻译配音",
-    version: "v1.0.0",
-    date: "2026-05-28",
+    tool: "VoxOver",
+    version: "v1.3.1",
+    date: "2026-05-29",
     badge: "badge-beta",
     badgeLabel: "测试版",
     assets: [
       {
         label: "macOS（Apple Silicon）",
-        filename: "AI-Translate-Dub-1.0.0-arm64.dmg",
-        url: "https://github.com/Badakonpro/ai-translate-dub/releases/download/v1.0.0/AI-Translate-Dub-1.0.0-arm64.dmg",
+        filename: "VoxOver-1.3.1-arm64.dmg",
+        url: "https://github.com/Badakonpro/ai-translate-dub/releases/download/v1.3.1/VoxOver-1.3.1-arm64.dmg",
         size: "~112 MB",
         icon: "💻",
       },
     ],
     notes: [
-      "打开 DMG，将 AI 翻译配音 拖到 Applications 文件夹，然后启动",
+      "打开 DMG，将 VoxOver 拖到 Applications 文件夹，然后启动",
       "应用会自动启动本地 Gradio 服务，浏览器未自动打开时请手动访问 http://127.0.0.1:7860",
       "安装 Python 依赖：pip install -r requirements.txt（需要 Python 3）",
       "安装 ffmpeg：brew install ffmpeg",
       "Ollama 后端：启动 Ollama，在应用内拉取模型（如 qwen3:latest）",
-      "DeepSeek 后端：在应用设置中填入 DeepSeek API Key，无需本地 GPU",
+      "DeepSeek / OpenAI / Anthropic：在设置中填入 API Key — OpenAI 支持自定义 Base URL",
     ],
-    releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.0.0",
+    releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.3.1",
   },
 ];
 ---
 
-<Layout title="下载" description="下载 LingYue Tools 应用。AI 翻译配音 — 免费的 macOS 视频转录与字幕翻译工具。">
+<Layout title="下载" description="下载 LingYue Tools 应用。VoxOver — 免费的 macOS 视频转录与字幕翻译工具。">
   <Nav slot="nav" />
 
   <section class="section">
