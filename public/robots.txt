@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lingyuetools.com/sitemap-index.xml

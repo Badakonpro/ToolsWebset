@@ -11,8 +11,28 @@ const {
   ogImage = "/og-image.png",
 } = Astro.props;
 
-const lang = Astro.url.pathname.startsWith('/zh') ? 'zh' : 'en';
-const siteTitle = title === "Home" ? "LingYue Tools" : `${title} — LingYue Tools`;
+const siteUrl = 'https://lingyuetools.com';
+const pathname = Astro.url.pathname;
+const lang = pathname.startsWith('/zh') ? 'zh' : 'en';
+const siteTitle = (title === "Home" || title === "首页") ? "LingYue Tools" : `${title} — LingYue Tools`;
+
+// Canonical & hreflang URLs
+const canonical = `${siteUrl}${pathname}`;
+const isZh = pathname.startsWith('/zh');
+const enPath = isZh ? (pathname.replace(/^\/zh/, '') || '/') : pathname;
+const zhPath = isZh ? pathname : (pathname === '/' ? '/zh/' : `/zh${pathname}`);
+const enUrl = `${siteUrl}${enPath}`;
+const zhUrl = `${siteUrl}${zhPath}`;
+const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+const websiteSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "LingYue Tools",
+  "url": siteUrl,
+  "description": "Free lightweight AI tools for Mac video creators. Transcribe, translate, and export subtitles — no subscription, no account.",
+  "inLanguage": ["en", "zh-CN"],
+});
 ---
 
 <!doctype html>
@@ -21,11 +41,35 @@ const siteTitle = title === "Home" ? "LingYue Tools" : `${title} — LingYue Too
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical & hreflang -->
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="zh" href={zhUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+
+    <!-- Open Graph -->
     <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageAbsolute} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LingYue Tools" />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_US'} />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
+
+    <!-- Structured data: WebSite -->
+    <script type="application/ld+json" set:html={websiteSchema} />
+
+    <!-- Page-specific structured data -->
+    <slot name="head" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{siteTitle}</title>
     <!-- Cloudflare Web Analytics (replace with your token) -->

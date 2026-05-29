@@ -45,9 +45,62 @@ const steps = [
   { n: "04", title: "Choose a translation backend", desc: "Connect to a running Ollama instance or enter your DeepSeek API key." },
   { n: "05", title: "Run and export", desc: "Transcription, translation, and muxing all happen in one click. Pick SRT, MKV, or MP4 output." },
 ];
+
+const softwareSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "VoxOver",
+  "operatingSystem": "macOS 12+",
+  "applicationCategory": "MultimediaApplication",
+  "applicationSubCategory": "Video Translation Software",
+  "softwareVersion": "1.3.1",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "url": "https://lingyuetools.com/tools/ai-translate-dub",
+  "downloadUrl": "https://github.com/Badakonpro/ai-translate-dub/releases/download/v1.3.1/VoxOver-1.3.1-arm64.dmg",
+  "description": "Free macOS app for AI video transcription and subtitle translation. Whisper speech recognition + Ollama/DeepSeek/OpenAI/Anthropic backends. Export SRT, MKV, or hard-burned MP4.",
+  "author": { "@type": "Organization", "name": "LingYue Tools", "url": "https://lingyuetools.com" },
+  "license": "https://opensource.org/licenses/MIT",
+  "featureList": [
+    "Whisper AI speech transcription (local)",
+    "Ollama local translation (fully private, no API key)",
+    "DeepSeek API translation",
+    "OpenAI API translation with custom Base URL",
+    "Anthropic Claude translation",
+    "SRT subtitle export",
+    "MKV soft subtitle export",
+    "MP4 hard-burned subtitle export",
+    "Parallel subtitle translation",
+    "Global translation context generation"
+  ],
+  "requirements": "macOS with Apple Silicon, Python 3, ffmpeg",
+  "inLanguage": "en"
+});
+
+const faqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Does VoxOver upload my video to the cloud?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Video processing (audio extraction, Whisper transcription) all happens locally on your Mac. Only subtitle text is sent to DeepSeek, OpenAI, or Anthropic if you choose those backends. Ollama is 100% local." }},
+    { "@type": "Question", "name": "Which Whisper model should I use with VoxOver?",
+      "acceptedAnswer": { "@type": "Answer", "text": "base is fast and accurate enough for most content. Use medium or large for technical or heavily accented speech. Models are cached locally after the first download." }},
+    { "@type": "Question", "name": "Can VoxOver translate into any language?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Translation quality depends on your chosen backend. Ollama models like qwen3 support Chinese, Japanese, Korean, and major European languages. DeepSeek covers 50+ languages. OpenAI and Anthropic support most major languages." }},
+    { "@type": "Question", "name": "Is VoxOver free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. VoxOver is free and open-source (MIT license). API usage for DeepSeek, OpenAI, or Anthropic is billed by those services at their standard rates." }},
+    { "@type": "Question", "name": "Is Intel Mac supported by VoxOver?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The current release is arm64 (Apple Silicon) only. Intel support may be added in a future release. You can run from source on Intel Mac today." }},
+    { "@type": "Question", "name": "Where are VoxOver Whisper models stored?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Models are cached at ~/Library/Application Support/VoxOver/whisper-models. Existing models in ~/.cache/whisper are copied automatically on first launch." }}
+  ]
+});
 ---
 
 <Layout title="VoxOver" description="VoxOver — AI video transcription and subtitle translation for Mac. Whisper + Ollama/DeepSeek/OpenAI/Anthropic. Outputs SRT, MKV, or MP4.">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={softwareSchemaJson} />
+    <script type="application/ld+json" set:html={faqSchemaJson} />
+  </Fragment>
   <Nav slot="nav" />
 
   <!-- HERO -->
