@@ -8,33 +8,33 @@ const dmgUrl = "https://github.com/Badakonpro/ai-translate-dub/releases/download
 const features = [
   {
     icon: "🎙",
-    title: "Whisper transcription",
-    desc: "Transcribe speech from any video using OpenAI Whisper. Choose from tiny, base, small, medium, or large models. Models are cached locally — no repeat downloads.",
+    title: "Local Whisper Transcription — No Cloud Upload",
+    desc: "Transcribe speech from any video using OpenAI Whisper, running fully on your Mac. Choose from tiny, base, small, medium, or large models. Models are cached locally — no repeat downloads.",
   },
   {
     icon: "🌐",
-    title: "Four translation backends",
+    title: "Ollama · DeepSeek · OpenAI · Anthropic Translation",
     desc: "Use a local Ollama model (100% private, no API key), DeepSeek for cloud translation, OpenAI (custom Base URL supported), or Anthropic Claude. Switch anytime in Settings.",
   },
   {
     icon: "📝",
-    title: "Global translation context",
+    title: "Global Translation Context for Better Accuracy",
     desc: "Optionally generate a topic, terminology, and style prompt from your video before translating. Improves consistency for technical, educational, or niche content.",
   },
   {
     icon: "⚡️",
-    title: "Parallel translation",
+    title: "Parallel Subtitle Translation — Faster Processing",
     desc: "Translate multiple subtitle segments simultaneously. Adjust worker count to balance speed against API rate limits.",
   },
   {
     icon: "📦",
-    title: "Three output formats",
-    desc: "Export a standalone .srt file, an .mkv with a soft subtitle track (switchable in any player), or a hard-burned .mp4 ready for upload.",
+    title: "Export SRT, MKV Soft Subtitles, or Hard-Burned MP4",
+    desc: "Export a standalone .srt file, an .mkv with a soft subtitle track (switchable in any player), or a hard-burned .mp4 ready for YouTube or social media upload.",
   },
   {
     icon: "🖥",
-    title: "Runs on your Mac",
-    desc: "Electron shell with a local Gradio UI. No cloud upload unless you use DeepSeek. Your videos never leave your machine by default.",
+    title: "100% Local Mac App — Your Videos Never Leave Your Machine",
+    desc: "Electron shell with a local Gradio UI. No cloud upload unless you use a cloud API backend. Works offline with Ollama for fully private subtitle translation.",
   },
 ];
 
@@ -136,7 +136,7 @@ const faqSchemaJson = JSON.stringify({
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <h2>What it does</h2>
+        <h2>Core Features</h2>
       </div>
       <div class="features-grid">
         {features.map(f => (

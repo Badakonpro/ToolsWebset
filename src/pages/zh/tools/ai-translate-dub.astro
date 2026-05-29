@@ -8,33 +8,33 @@ const dmgUrl = "https://github.com/Badakonpro/ai-translate-dub/releases/download
 const features = [
   {
     icon: "🎙",
-    title: "Whisper 语音转录",
-    desc: "从任意视频中提取语音并转录字幕，支持 tiny/base/small/medium/large 模型。模型本地缓存，无需重复下载。",
+    title: "本地 Whisper 语音转录 — 无需上传云端",
+    desc: "从任意视频中提取语音并在本机转录字幕，支持 tiny/base/small/medium/large 模型。模型本地缓存，无需重复下载。",
   },
   {
     icon: "🌐",
-    title: "四种翻译后端",
+    title: "Ollama · DeepSeek · OpenAI · Anthropic 四种翻译引擎",
     desc: "使用本地 Ollama 模型（完全私有，无需 API Key）、DeepSeek 云端翻译、OpenAI（支持自定义 Base URL）或 Anthropic Claude，在设置中随时切换。",
   },
   {
     icon: "📝",
-    title: "全局翻译上下文",
+    title: "全局翻译上下文 — 提升专业内容翻译精度",
     desc: "可选：翻译前先基于视频标题和字幕抽样生成主题、术语和风格提示，再传给每条字幕翻译，提升专业内容的一致性。",
   },
   {
     icon: "⚡️",
-    title: "并行翻译",
+    title: "并行字幕翻译 — 大幅加快处理速度",
     desc: "同时翻译多个字幕片段，可调整并发数以平衡速度和 API 限速。",
   },
   {
     icon: "📦",
-    title: "三种输出格式",
-    desc: "导出独立的 .srt 文件、带软字幕轨的 .mkv（VLC/IINA 中可切换），或硬烧录字幕的 .mp4。",
+    title: "导出 SRT 字幕、MKV 软字幕或硬烧录 MP4",
+    desc: "导出独立的 .srt 文件、带软字幕轨的 .mkv（VLC/IINA 中可切换），或硬烧录字幕的 .mp4，直接上传 YouTube 或社交媒体。",
   },
   {
     icon: "🖥",
-    title: "本机运行",
-    desc: "Electron 外壳 + 本地 Gradio UI。除非使用 DeepSeek，否则无任何云端上传，视频默认不离开本机。",
+    title: "100% 本地运行 — 视频永不离开你的 Mac",
+    desc: "Electron 外壳 + 本地 Gradio UI。使用 Ollama 时完全离线，视频和字幕不经过任何服务器，保障隐私安全。",
   },
 ];
 
@@ -134,7 +134,7 @@ const faqSchemaJson = JSON.stringify({
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <h2>功能介绍</h2>
+        <h2>核心功能</h2>
       </div>
       <div class="features-grid">
         {features.map(f => (
