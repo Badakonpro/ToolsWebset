@@ -2,6 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import { getLatestRelease } from '../../../lib/release';
+
+const rel = await getLatestRelease();
 ---
 
 <Layout title="工具" description="免费开源 Mac AI 工具集 — VoxOver：Whisper 转录，Ollama/DeepSeek/OpenAI/Anthropic 翻译（无需订阅），导出 SRT、MKV 或 MP4。">
@@ -35,7 +38,7 @@ import Footer from '../../../components/Footer.astro';
             </p>
             <div class="tool-card-meta">
               <span>macOS arm64</span>
-              <span>v1.3.1</span>
+              <span>v{rel.version}</span>
               <span class="meta-free">免费 · 开源 (MIT)</span>
             </div>
           </a>

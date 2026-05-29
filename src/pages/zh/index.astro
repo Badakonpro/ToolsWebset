@@ -2,6 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { getLatestRelease } from '../../lib/release';
+
+const rel = await getLatestRelease();
 
 const tools = [
   {
@@ -11,7 +14,7 @@ const tools = [
     badge: "beta",
     badgeLabel: "测试版",
     platform: "macOS arm64",
-    version: "v1.3.1",
+    version: rel.tag,
     available: true,
   },
   {
@@ -142,7 +145,7 @@ const principles = [
         <div class="featured-card-body">
           <div class="featured-meta">
             <span class="badge badge-beta">测试版</span>
-            <span class="featured-version">v1.3.1</span>
+            <span class="featured-version">{rel.tag}</span>
           </div>
           <h3 class="featured-name">VoxOver</h3>
           <p class="featured-desc">

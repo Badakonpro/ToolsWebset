@@ -1,0 +1,26 @@
+# 将此文件放到 ai-translate-dub 仓库的 .github/workflows/ 目录下
+# 文件名：trigger-site-rebuild.yml
+#
+# 效果：每次发布新 Release，自动触发 lingyuetools.org 重新构建部署
+#
+# 步骤：
+# 1. 在 Cloudflare Pages 控制台 → 你的项目 → Settings → Builds & Deployments
+#    → Deploy Hooks → Add deploy hook，复制生成的 URL
+# 2. 在 ai-translate-dub 仓库 → Settings → Secrets and variables → Actions
+#    → New repository secret，名称：CF_DEPLOY_HOOK，值：上面的 URL
+# 3. 把此文件放到 .github/workflows/trigger-site-rebuild.yml
+
+name: Trigger site rebuild on release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  rebuild-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy
+        run: |
+          curl -s -X POST "${{ secrets.CF_DEPLOY_HOOK }}"
+          echo "Deploy hook triggered for release ${{ github.event.release.tag_name }}"
