@@ -73,6 +73,7 @@ const softwareSchemaJson = JSON.stringify({
     "Global translation context generation"
   ],
   "requirements": "macOS with Apple Silicon, Python 3, ffmpeg",
+  "isAccessibleForFree": true,
   "inLanguage": "en"
 });
 
@@ -96,7 +97,7 @@ const faqSchemaJson = JSON.stringify({
 });
 ---
 
-<Layout title="VoxOver" description="VoxOver — AI video transcription and subtitle translation for Mac. Whisper + Ollama/DeepSeek/OpenAI/Anthropic. Outputs SRT, MKV, or MP4.">
+<Layout title="VoxOver — Free Open-Source Mac Subtitle Translator" description="VoxOver — free, open-source (MIT) Mac app for AI video transcription and subtitle translation. Whisper + Ollama (local, no API key), DeepSeek, OpenAI, Anthropic. Export SRT, MKV, or hard-burned MP4. No subscription, no account.">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={softwareSchemaJson} />
     <script type="application/ld+json" set:html={faqSchemaJson} />
@@ -111,6 +112,7 @@ const faqSchemaJson = JSON.stringify({
           <span class="badge badge-beta">Beta</span>
           <span class="tool-hero-version">v1.3.1</span>
           <span class="tool-hero-platform">macOS arm64</span>
+          <span class="tool-hero-badge-free">Free · Open Source (MIT)</span>
         </div>
         <h1 class="tool-hero-title">VoxOver</h1>
         <p class="tool-hero-desc">
@@ -296,6 +298,11 @@ const faqSchemaJson = JSON.stringify({
   font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.55rem;
   border-radius: 4px; background: var(--color-bg-muted);
   color: var(--color-text-muted); border: 1px solid var(--color-border);
+}
+.tool-hero-badge-free {
+  font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.55rem;
+  border-radius: 4px; background: #dcfce7; color: #15803d;
+  border: 1px solid #bbf7d0;
 }
 .tool-hero-title { margin-bottom: 1rem; }
 .tool-hero-desc { max-width: 55ch; font-size: 1.0625rem; color: var(--color-text-secondary); margin-bottom: 1.75rem; }

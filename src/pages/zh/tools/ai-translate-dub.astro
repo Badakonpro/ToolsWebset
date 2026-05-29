@@ -73,6 +73,7 @@ const softwareSchemaJson = JSON.stringify({
     "全局翻译上下文生成"
   ],
   "requirements": "macOS Apple Silicon, Python 3, ffmpeg",
+  "isAccessibleForFree": true,
   "inLanguage": "zh-CN"
 });
 
@@ -94,7 +95,7 @@ const faqSchemaJson = JSON.stringify({
 });
 ---
 
-<Layout title="VoxOver" description="VoxOver — Mac 端 AI 视频转录与字幕翻译工具。Whisper + Ollama/DeepSeek/OpenAI/Anthropic。导出 SRT、MKV 或 MP4。">
+<Layout title="VoxOver — 免费开源 Mac 字幕翻译工具" description="VoxOver — 免费开源（MIT）Mac 端 AI 视频转录与字幕翻译工具。Whisper + Ollama（本地，无需 API Key）、DeepSeek、OpenAI、Anthropic。导出 SRT、MKV 或硬烧录 MP4。无需订阅，无需账号。">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={softwareSchemaJson} />
     <script type="application/ld+json" set:html={faqSchemaJson} />
@@ -109,6 +110,7 @@ const faqSchemaJson = JSON.stringify({
           <span class="badge badge-beta">测试版</span>
           <span class="tool-hero-version">v1.3.1</span>
           <span class="tool-hero-platform">macOS arm64</span>
+          <span class="tool-hero-badge-free">免费 · 开源 (MIT)</span>
         </div>
         <h1 class="tool-hero-title">VoxOver</h1>
         <p class="tool-hero-desc">
@@ -294,6 +296,11 @@ const faqSchemaJson = JSON.stringify({
   font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.55rem;
   border-radius: 4px; background: var(--color-bg-muted);
   color: var(--color-text-muted); border: 1px solid var(--color-border);
+}
+.tool-hero-badge-free {
+  font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.55rem;
+  border-radius: 4px; background: #dcfce7; color: #15803d;
+  border: 1px solid #bbf7d0;
 }
 .tool-hero-title { margin-bottom: 1rem; }
 .tool-hero-desc { max-width: 55ch; font-size: 1.0625rem; color: var(--color-text-secondary); margin-bottom: 1.75rem; }

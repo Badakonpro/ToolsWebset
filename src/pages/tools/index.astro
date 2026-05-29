@@ -4,7 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 ---
 
-<Layout title="Tools" description="All tools by LingYue Tools — AI video translation, dubbing, subtitle generation for Mac.">
+<Layout title="Tools" description="Free open-source AI tools for Mac video creators — VoxOver: transcribe with Whisper, translate via Ollama/DeepSeek/OpenAI/Anthropic (no subscription), export SRT, MKV, or MP4.">
   <Nav slot="nav" />
 
   <section class="section">
@@ -31,12 +31,12 @@ import Footer from '../../components/Footer.astro';
             </div>
             <h3 class="tool-card-name">VoxOver</h3>
             <p class="tool-card-desc">
-              Transcribe video with Whisper, translate subtitles via Ollama, DeepSeek, OpenAI, or Anthropic, export SRT, MKV soft-sub, or hard-burned MP4.
+              Free &amp; open-source Mac app. Transcribe video with Whisper, translate via Ollama (local, no API key), DeepSeek, OpenAI, or Anthropic. Export SRT, MKV soft-sub, or hard-burned MP4.
             </p>
             <div class="tool-card-meta">
               <span>macOS arm64</span>
               <span>v1.3.1</span>
-              <span>Free</span>
+              <span class="meta-free">Free · Open Source (MIT)</span>
             </div>
           </a>
         </div>
@@ -93,5 +93,8 @@ a.tool-card:hover { border-color: var(--color-accent); box-shadow: 0 0 0 3px rgb
   font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem;
   border-radius: 4px; background: var(--color-bg-muted);
   color: var(--color-text-muted); border: 1px solid var(--color-border);
+}
+.tool-card-meta .meta-free {
+  background: #dcfce7; color: #15803d; border-color: #bbf7d0;
 }
 </style>

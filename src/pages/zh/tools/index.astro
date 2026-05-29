@@ -4,7 +4,7 @@ import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 ---
 
-<Layout title="工具" description="LingYue Tools 全部工具 — Mac 端 AI 视频翻译、配音、字幕生成。">
+<Layout title="工具" description="免费开源 Mac AI 工具集 — VoxOver：Whisper 转录，Ollama/DeepSeek/OpenAI/Anthropic 翻译（无需订阅），导出 SRT、MKV 或 MP4。">
   <Nav slot="nav" />
 
   <section class="section">
@@ -31,12 +31,12 @@ import Footer from '../../../components/Footer.astro';
             </div>
             <h3 class="tool-card-name">VoxOver</h3>
             <p class="tool-card-desc">
-              使用 Whisper 转录视频，通过 Ollama、DeepSeek、OpenAI 或 Anthropic 翻译字幕，导出 SRT、MKV 软字幕或硬烧录 MP4。
+              免费开源 Mac 应用（MIT）。Whisper 转录视频，通过 Ollama（本地，无需 API Key）、DeepSeek、OpenAI 或 Anthropic 翻译字幕，导出 SRT、MKV 软字幕或硬烧录 MP4。
             </p>
             <div class="tool-card-meta">
               <span>macOS arm64</span>
               <span>v1.3.1</span>
-              <span>免费</span>
+              <span class="meta-free">免费 · 开源 (MIT)</span>
             </div>
           </a>
         </div>
@@ -93,5 +93,8 @@ a.tool-card:hover { border-color: var(--color-accent); box-shadow: 0 0 0 3px rgb
   font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem;
   border-radius: 4px; background: var(--color-bg-muted);
   color: var(--color-text-muted); border: 1px solid var(--color-border);
+}
+.tool-card-meta .meta-free {
+  background: #dcfce7; color: #15803d; border-color: #bbf7d0;
 }
 </style>
