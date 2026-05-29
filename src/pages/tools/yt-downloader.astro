@@ -9,41 +9,41 @@ const { tag, version, dmgUrl, releaseUrl } = await getLatestYTDRelease();
 const features = [
   {
     icon: "📋",
-    title: "Clipboard Auto-Detection — Paste-Free Start",
-    desc: "Copy any YouTube URL to your clipboard and YTDownloader detects it instantly. No need to open the app first or manually paste — just copy and click Download.",
+    title: "Clipboard Auto-Detection — No Manual Paste",
+    desc: "Copy a YouTube URL and YTDownloader detects it instantly. No need to open the app first — just copy, then click Download.",
   },
   {
     icon: "🎬",
-    title: "Quality Selection — Best to 360p, or Audio-Only MP3",
-    desc: "Choose from best quality, 1080p, 720p, 480p, 360p, or audio-only MP3 export. All quality options go through ffmpeg for clean output.",
+    title: "Quality Selection — Best, 1080p, 720p, 480p, 360p, MP3",
+    desc: "Pick your preferred quality before downloading. Audio-only MP3 export is available for podcasts, music, and lectures.",
   },
   {
     icon: "📊",
     title: "Live Progress — Speed, ETA, and File Size",
-    desc: "See real-time download progress with speed, estimated time remaining, and file size as reported by yt-dlp. No guessing, no spinner-only UI.",
+    desc: "Real-time download feedback: speed, estimated time remaining, and file size. No spinner-only UI.",
   },
   {
     icon: "⏸",
-    title: "Pause, Resume, and Cancel Downloads",
-    desc: "Full download control — pause a job mid-way, resume it later, or cancel entirely. Finished jobs can be cleared from the list to keep the window tidy.",
+    title: "Pause, Resume, and Cancel",
+    desc: "Full job control — pause mid-way, resume later, or cancel. Clear finished jobs to keep the window tidy.",
   },
   {
     icon: "📦",
     title: "Batteries Included — yt-dlp, ffmpeg, ffprobe Bundled",
-    desc: "No Homebrew installs or PATH juggling required. yt-dlp, ffmpeg, and ffprobe are bundled inside the app package and updated at build time.",
+    desc: "No Homebrew or PATH setup needed. yt-dlp, ffmpeg, and ffprobe ship inside the app package.",
   },
   {
     icon: "🗂",
-    title: "Saves to ~/Downloads/YouTube Automatically",
-    desc: "All downloads go to a dedicated ~/Downloads/YouTube folder. Files are named and organized automatically — no cluttered Downloads folder.",
+    title: "Saves to ~/Downloads/YouTube",
+    desc: "All downloads land in a dedicated ~/Downloads/YouTube folder, named and organized automatically.",
   },
 ];
 
 const steps = [
-  { n: "01", title: "Download and install", desc: "Download the DMG, drag YTDownloader.app to /Applications, and launch it. On first launch, macOS may ask you to allow the app — use Control-click > Open if needed." },
-  { n: "02", title: "Copy a YouTube URL", desc: "Copy any YouTube video URL. YTDownloader detects it from the clipboard automatically and pre-fills the input field." },
-  { n: "03", title: "Choose quality", desc: "Pick your preferred quality: best, 1080p, 720p, 480p, 360p, or audio-only MP3." },
-  { n: "04", title: "Download and enjoy", desc: "Click Go. Watch live progress — speed, ETA, and size update in real time. The file lands in ~/Downloads/YouTube when done." },
+  { n: "01", title: "Install the app", desc: "Download the DMG, drag YTDownloader.app to /Applications, and launch. If macOS blocks it, use Control-click > Open." },
+  { n: "02", title: "Copy a YouTube URL", desc: "Copy any YouTube video link. YTDownloader detects it from the clipboard and pre-fills the input automatically." },
+  { n: "03", title: "Choose quality", desc: "Pick best, 1080p, 720p, 480p, 360p, or audio-only MP3." },
+  { n: "04", title: "Download", desc: "Click Go. Live progress updates in real time. The file lands in ~/Downloads/YouTube when done." },
 ];
 
 const softwareSchemaJson = JSON.stringify({
