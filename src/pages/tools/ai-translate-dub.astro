@@ -96,12 +96,23 @@ const faqSchemaJson = JSON.stringify({
       "acceptedAnswer": { "@type": "Answer", "text": "Models are cached at ~/Library/Application Support/VoxOver/whisper-models. Existing models in ~/.cache/whisper are copied automatically on first launch." }}
   ]
 });
+
+const breadcrumbSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lingyuetools.org" },
+    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://lingyuetools.org/tools" },
+    { "@type": "ListItem", "position": 3, "name": "VoxOver" }
+  ]
+});
 ---
 
 <Layout title="VoxOver — Free Open-Source Mac Subtitle Translator" description="VoxOver — free, open-source (MIT) Mac app for AI video transcription and subtitle translation. Whisper + Ollama (local, no API key), DeepSeek, OpenAI, Anthropic. Export SRT, MKV, or hard-burned MP4. No subscription, no account.">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={softwareSchemaJson} />
     <script type="application/ld+json" set:html={faqSchemaJson} />
+    <script type="application/ld+json" set:html={breadcrumbSchemaJson} />
   </Fragment>
   <Nav slot="nav" />
 

@@ -6,6 +6,16 @@ import { getLatestRelease } from '../../lib/release';
 
 const rel = await getLatestRelease();
 
+const organizationSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "LingYue Tools",
+  "url": "https://lingyuetools.org",
+  "description": "免费轻量 Mac AI 工具集，专为视频创作者打造。无需订阅，无需账号。",
+  "sameAs": ["https://github.com/Badakonpro"],
+  "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "email": "hello@lingyuetools.org" }
+});
+
 const tools = [
   {
     slug: "ai-translate-dub",
@@ -58,6 +68,9 @@ const principles = [
 ---
 
 <Layout title="首页" description="LingYue Tools — 免费开源 Mac AI 工具集，专为视频创作者打造。VoxOver：Whisper 转录、Ollama/DeepSeek/OpenAI/Anthropic 翻译、导出 SRT/MKV/MP4，无需订阅，无需账号。">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={organizationSchema} />
+  </Fragment>
   <Nav slot="nav" />
 
   <!-- HERO -->

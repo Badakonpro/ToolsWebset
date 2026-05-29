@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lingyuetools.com/sitemap-index.xml
+Sitemap: https://lingyuetools.org/sitemap-index.xml

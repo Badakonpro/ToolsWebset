@@ -6,6 +6,16 @@ import { getLatestRelease } from '../lib/release';
 
 const rel = await getLatestRelease();
 
+const organizationSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "LingYue Tools",
+  "url": "https://lingyuetools.org",
+  "description": "Free lightweight AI tools for Mac video creators. No subscription, no account.",
+  "sameAs": ["https://github.com/Badakonpro"],
+  "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "email": "hello@lingyuetools.org" }
+});
+
 const tools = [
   {
     slug: "ai-translate-dub",
@@ -58,6 +68,9 @@ const principles = [
 ---
 
 <Layout title="Home" description="LingYue Tools — free open-source AI tools for Mac video creators. VoxOver: transcribe with Whisper, translate subtitles via Ollama/DeepSeek/OpenAI/Anthropic, export SRT/MKV/MP4. No subscription, no account.">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={organizationSchema} />
+  </Fragment>
   <Nav slot="nav" />
 
   <!-- HERO -->

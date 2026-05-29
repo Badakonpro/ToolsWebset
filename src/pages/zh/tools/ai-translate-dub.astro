@@ -94,12 +94,23 @@ const faqSchemaJson = JSON.stringify({
       "acceptedAnswer": { "@type": "Answer", "text": "目前的安装包仅支持 Apple Silicon（arm64）。Intel Mac 支持可能在未来版本中加入。目前可通过源码在 Intel Mac 上运行。" }}
   ]
 });
+
+const breadcrumbSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://lingyuetools.org/zh/" },
+    { "@type": "ListItem", "position": 2, "name": "工具", "item": "https://lingyuetools.org/zh/tools" },
+    { "@type": "ListItem", "position": 3, "name": "VoxOver" }
+  ]
+});
 ---
 
 <Layout title="VoxOver — 免费开源 Mac 字幕翻译工具" description="VoxOver — 免费开源（MIT）Mac 端 AI 视频转录与字幕翻译工具。Whisper + Ollama（本地，无需 API Key）、DeepSeek、OpenAI、Anthropic。导出 SRT、MKV 或硬烧录 MP4。无需订阅，无需账号。">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={softwareSchemaJson} />
     <script type="application/ld+json" set:html={faqSchemaJson} />
+    <script type="application/ld+json" set:html={breadcrumbSchemaJson} />
   </Fragment>
   <Nav slot="nav" />
 

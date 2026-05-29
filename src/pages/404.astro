@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="404 — Not Found" description="Page not found — LingYue Tools">
+  <Nav slot="nav" />
+
+  <section class="section">
+    <div class="container" style="text-align:center;padding:4rem 0;">
+      <h1 style="font-size:4rem;margin-bottom:0.5rem;">404</h1>
+      <p style="font-size:1.25rem;color:var(--color-text-secondary);margin-bottom:2rem;">
+        This page doesn't exist.
+      </p>
+      <a href="/" class="btn btn-primary">Go Home</a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
