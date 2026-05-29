@@ -11,7 +11,7 @@ const {
   ogImage = "/og-image.png",
 } = Astro.props;
 
-const siteUrl = 'https://lingyuetools.com';
+const siteUrl = 'https://lingyuetools.org';
 const pathname = Astro.url.pathname;
 const lang = pathname.startsWith('/zh') ? 'zh' : 'en';
 const siteTitle = (title === "Home" || title === "首页") ? "LingYue Tools" : `${title} — LingYue Tools`;
