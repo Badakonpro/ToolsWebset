@@ -307,3 +307,69 @@ const breadcrumbSchemaJson = JSON.stringify({
 
   <Footer slot="footer" />
 </Layout>
+
+<style>
+.tool-hero { padding: 5rem 0 4rem; border-bottom: 1px solid var(--color-border); }
+.tool-hero-badges { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.tool-hero-version, .tool-hero-platform {
+  font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.55rem;
+  border-radius: 4px; background: var(--color-bg-muted);
+  color: var(--color-text-muted); border: 1px solid var(--color-border);
+}
+.tool-hero-badge-free {
+  font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.55rem;
+  border-radius: 4px; background: #dcfce7; color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+.tool-hero-title { margin-bottom: 1rem; }
+.tool-hero-desc { max-width: 55ch; font-size: 1.0625rem; color: var(--color-text-secondary); margin-bottom: 1.75rem; }
+.tool-hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.tool-hero-req { margin-top: 1rem; font-size: 0.8125rem; color: var(--color-text-muted); }
+
+.section-header { margin-bottom: 2.5rem; }
+.section-header h2 { margin-bottom: 0; }
+.section-bg { background: var(--color-bg-subtle); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.feature-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; }
+.feature-icon { font-size: 1.75rem; margin-bottom: 0.9rem; }
+.feature-card h3 { margin-bottom: 0.4rem; font-size: 1rem; }
+.feature-card p { font-size: 0.875rem; color: var(--color-text-secondary); }
+
+.steps { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; max-width: 680px; }
+.step { display: flex; gap: 1.25rem; align-items: flex-start; }
+.step-number { font-size: 0.8125rem; font-weight: 800; color: var(--color-accent); background: #EEF2FF; border-radius: 6px; padding: 0.25rem 0.6rem; flex-shrink: 0; letter-spacing: 0.04em; margin-top: 0.1rem; }
+.step-title { font-size: 1rem; margin-bottom: 0.3rem; }
+.step-desc { font-size: 0.875rem; color: var(--color-text-secondary); }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th { text-align: left; font-size: 0.8125rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding: 0.6rem 1rem; border-bottom: 2px solid var(--color-border); }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); color: var(--color-text-secondary); }
+tr:last-child td { border-bottom: none; }
+td:first-child { color: var(--color-text); font-weight: 600; }
+
+.req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.req-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; }
+.req-card h3 { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+.req-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.req-card li { font-size: 0.875rem; color: var(--color-text-secondary); padding-left: 1rem; position: relative; }
+.req-card li::before { content: "·"; position: absolute; left: 0; color: var(--color-accent); font-weight: 700; }
+
+.faq { max-width: 680px; display: flex; flex-direction: column; gap: 1.5rem; }
+.faq-item dt { font-weight: 600; margin-bottom: 0.4rem; }
+.faq-item dd { font-size: 0.9375rem; color: var(--color-text-secondary); margin: 0; }
+
+.cta-strip { background: var(--color-accent); padding: 4rem 0; }
+.cta-strip-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.cta-strip h2 { color: #fff; }
+.cta-strip p { color: rgba(255,255,255,0.75); margin-top: 0.35rem; font-size: 0.9375rem; }
+.cta-strip-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.cta-strip .btn-primary { background: #fff; color: var(--color-accent); border-color: #fff; }
+.cta-strip .btn-primary:hover { background: #F0F0FF; }
+
+@media (max-width: 600px) {
+  .tool-hero { padding: 3.5rem 0 3rem; }
+  .cta-strip-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>
