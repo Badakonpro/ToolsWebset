@@ -21,8 +21,6 @@ const tools = [
     slug: "ai-translate-dub",
     name: "VoxOver",
     desc: "免费开源 Mac 应用（MIT）。Whisper 转录视频字幕，通过 Ollama（本地，无需 API Key）、DeepSeek、OpenAI 或 Anthropic 翻译，导出 SRT、MKV 或 MP4。",
-    badge: "beta",
-    badgeLabel: "正式版",
     platform: "macOS arm64",
     version: rel.tag,
     available: true,
@@ -111,7 +109,7 @@ const principles = [
                   <path d="M16 8h1.5M16 13h1.5M16 18h1.5" stroke="#4F46E5" stroke-width="1.25" stroke-linecap="round"/>
                 </svg>
               </div>
-              <span class={`badge badge-${t.badge}`}>{t.badgeLabel}</span>
+
             </div>
             <h3 class="tool-card-name">{t.name}</h3>
             <p class="tool-card-desc">{t.desc}</p>
@@ -157,7 +155,6 @@ const principles = [
       <div class="featured-card">
         <div class="featured-card-body">
           <div class="featured-meta">
-            <span class="badge badge-beta">正式版</span>
             <span class="featured-version">{rel.tag}</span>
           </div>
           <h3 class="featured-name">VoxOver</h3>

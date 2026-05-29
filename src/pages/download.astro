@@ -11,8 +11,6 @@ const releases = [
     tool: "VoxOver",
     version: rel.tag,
     date: rel.date,
-    badge: "badge-beta",
-    badgeLabel: "Beta",
     assets: [
       {
         label: "macOS (Apple Silicon)",
@@ -51,7 +49,6 @@ const releases = [
             <div>
               <h2 class="release-tool">{r.tool}</h2>
               <div class="release-meta">
-                <span class={`badge ${r.badge}`}>{r.badgeLabel}</span>
                 <span class="release-version">{r.version}</span>
                 <span class="release-date">Released {r.date}</span>
               </div>

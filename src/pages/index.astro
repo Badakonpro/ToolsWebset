@@ -21,8 +21,6 @@ const tools = [
     slug: "ai-translate-dub",
     name: "VoxOver",
     desc: "Free & open-source Mac app. Transcribe video with Whisper, translate subtitles via Ollama (local, no API key), DeepSeek, OpenAI, or Anthropic. Export SRT, MKV, or MP4.",
-    badge: "beta",
-    badgeLabel: "Beta",
     platform: "macOS arm64",
     version: rel.tag,
     available: true,
@@ -111,7 +109,7 @@ const principles = [
                   <path d="M16 8h1.5M16 13h1.5M16 18h1.5" stroke="#4F46E5" stroke-width="1.25" stroke-linecap="round"/>
                 </svg>
               </div>
-              <span class={`badge badge-${t.badge}`}>{t.badgeLabel}</span>
+
             </div>
             <h3 class="tool-card-name">{t.name}</h3>
             <p class="tool-card-desc">{t.desc}</p>
@@ -157,7 +155,6 @@ const principles = [
       <div class="featured-card">
         <div class="featured-card-body">
           <div class="featured-meta">
-            <span class="badge badge-beta">Beta</span>
             <span class="featured-version">{rel.tag}</span>
           </div>
           <h3 class="featured-name">VoxOver</h3>
