@@ -1,0 +1,309 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLatestYTDRelease } from '../../lib/release-ytdownloader';
+
+const { tag, version, dmgUrl, releaseUrl } = await getLatestYTDRelease();
+
+const features = [
+  {
+    icon: "📋",
+    title: "Clipboard Auto-Detection — Paste-Free Start",
+    desc: "Copy any YouTube URL to your clipboard and YTDownloader detects it instantly. No need to open the app first or manually paste — just copy and click Download.",
+  },
+  {
+    icon: "🎬",
+    title: "Quality Selection — Best to 360p, or Audio-Only MP3",
+    desc: "Choose from best quality, 1080p, 720p, 480p, 360p, or audio-only MP3 export. All quality options go through ffmpeg for clean output.",
+  },
+  {
+    icon: "📊",
+    title: "Live Progress — Speed, ETA, and File Size",
+    desc: "See real-time download progress with speed, estimated time remaining, and file size as reported by yt-dlp. No guessing, no spinner-only UI.",
+  },
+  {
+    icon: "⏸",
+    title: "Pause, Resume, and Cancel Downloads",
+    desc: "Full download control — pause a job mid-way, resume it later, or cancel entirely. Finished jobs can be cleared from the list to keep the window tidy.",
+  },
+  {
+    icon: "📦",
+    title: "Batteries Included — yt-dlp, ffmpeg, ffprobe Bundled",
+    desc: "No Homebrew installs or PATH juggling required. yt-dlp, ffmpeg, and ffprobe are bundled inside the app package and updated at build time.",
+  },
+  {
+    icon: "🗂",
+    title: "Saves to ~/Downloads/YouTube Automatically",
+    desc: "All downloads go to a dedicated ~/Downloads/YouTube folder. Files are named and organized automatically — no cluttered Downloads folder.",
+  },
+];
+
+const steps = [
+  { n: "01", title: "Download and install", desc: "Download the DMG, drag YTDownloader.app to /Applications, and launch it. On first launch, macOS may ask you to allow the app — use Control-click > Open if needed." },
+  { n: "02", title: "Copy a YouTube URL", desc: "Copy any YouTube video URL. YTDownloader detects it from the clipboard automatically and pre-fills the input field." },
+  { n: "03", title: "Choose quality", desc: "Pick your preferred quality: best, 1080p, 720p, 480p, 360p, or audio-only MP3." },
+  { n: "04", title: "Download and enjoy", desc: "Click Go. Watch live progress — speed, ETA, and size update in real time. The file lands in ~/Downloads/YouTube when done." },
+];
+
+const softwareSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "YTDownloader",
+  "operatingSystem": "macOS 13+",
+  "applicationCategory": "MultimediaApplication",
+  "applicationSubCategory": "Video Downloader",
+  "softwareVersion": version,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "url": "https://lingyuetools.org/tools/yt-downloader",
+  "downloadUrl": dmgUrl,
+  "description": "Free native macOS YouTube downloader. Clipboard auto-detection, quality selection (best/1080p/720p/480p/360p/MP3), live progress. Bundles yt-dlp, ffmpeg, ffprobe.",
+  "author": { "@type": "Organization", "name": "LingYue Tools", "url": "https://lingyuetools.org" },
+  "featureList": [
+    "Clipboard auto-detection of YouTube URLs",
+    "Quality selection: best, 1080p, 720p, 480p, 360p, audio-only MP3",
+    "Live download progress with speed, ETA, and file size",
+    "Pause, resume, and cancel downloads",
+    "Bundled yt-dlp, ffmpeg, ffprobe",
+    "Auto-saves to ~/Downloads/YouTube",
+    "SwiftUI native macOS app"
+  ],
+  "requirements": "macOS 13 or later, Apple Silicon (arm64)",
+  "isAccessibleForFree": true,
+  "inLanguage": "en"
+});
+
+const faqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is YTDownloader free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. YTDownloader is free to download and use." }},
+    { "@type": "Question", "name": "Does YTDownloader need Homebrew or ffmpeg installed?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. yt-dlp, ffmpeg, and ffprobe are all bundled inside the app package. You don't need Homebrew or any command-line setup." }},
+    { "@type": "Question", "name": "Where are downloads saved?",
+      "acceptedAnswer": { "@type": "Answer", "text": "All downloads go to ~/Downloads/YouTube automatically." }},
+    { "@type": "Question", "name": "macOS says the app is from an unidentified developer. How do I open it?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Right-click the app in Finder and choose Open, then confirm. Or run: xattr -dr com.apple.quarantine /Applications/YTDownloader.app" }},
+    { "@type": "Question", "name": "Is Intel Mac supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The published DMG is Apple Silicon (arm64) only. Intel Mac users can build from source using Xcode command line tools and make dmg." }},
+    { "@type": "Question", "name": "Can YTDownloader download from sites other than YouTube?",
+      "acceptedAnswer": { "@type": "Answer", "text": "YTDownloader is designed for YouTube. It uses yt-dlp internally, which supports many sites, but the UI and clipboard detection are optimized for YouTube URLs." }}
+  ]
+});
+
+const breadcrumbSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lingyuetools.org" },
+    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://lingyuetools.org/tools" },
+    { "@type": "ListItem", "position": 3, "name": "YTDownloader" }
+  ]
+});
+---
+
+<Layout title="YTDownloader — Free Native macOS YouTube Downloader" description="YTDownloader — free native macOS app to download YouTube videos. Clipboard auto-detection, quality selection (best/1080p/720p/480p/360p/MP3), live progress. Bundles yt-dlp and ffmpeg. No Homebrew needed.">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={softwareSchemaJson} />
+    <script type="application/ld+json" set:html={faqSchemaJson} />
+    <script type="application/ld+json" set:html={breadcrumbSchemaJson} />
+    <link rel="alternate" hreflang="zh" href="https://lingyuetools.org/zh/tools/yt-downloader" />
+    <link rel="alternate" hreflang="en" href="https://lingyuetools.org/tools/yt-downloader" />
+  </Fragment>
+  <Nav slot="nav" />
+
+  <!-- HERO -->
+  <section class="tool-hero">
+    <div class="container tool-hero-inner">
+      <div>
+        <div class="tool-hero-badges">
+          <span class="tool-hero-version">v{version}</span>
+          <span class="tool-hero-platform">macOS arm64</span>
+          <span class="tool-hero-badge-free">Free Download</span>
+        </div>
+        <h1 class="tool-hero-title">YTDownloader</h1>
+        <p class="tool-hero-desc">
+          A native macOS app for downloading YouTube videos from a copied or pasted link.
+          Clipboard auto-detection, quality selection, live progress — and yt-dlp, ffmpeg, ffprobe are all bundled.
+          No terminal, no Homebrew, no setup.
+        </p>
+        <div class="tool-hero-actions">
+          <a href={dmgUrl} class="btn btn-primary btn-lg">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9M4.5 7l3.5 3.5L11.5 7M2 13h12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download DMG — Free
+          </a>
+          <a href="https://github.com/Badakonpro/YTDownloader" target="_blank" rel="noopener" class="btn btn-outline btn-lg">View on GitHub</a>
+        </div>
+        <p class="tool-hero-req">macOS 13+ · Apple Silicon (arm64) · No dependencies required</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Core Features</h2>
+      </div>
+      <div class="features-grid">
+        {features.map(f => (
+          <div class="feature-card">
+            <div class="feature-icon">{f.icon}</div>
+            <h3>{f.title}</h3>
+            <p>{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2>How it works</h2>
+      </div>
+      <ol class="steps">
+        {steps.map(s => (
+          <li class="step">
+            <div class="step-number">{s.n}</div>
+            <div>
+              <h3 class="step-title">{s.title}</h3>
+              <p class="step-desc">{s.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- QUALITY OPTIONS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Quality options</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Option</th><th>Description</th><th>Best for</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Best</code></td>
+              <td>Highest available resolution and bitrate</td>
+              <td>Archiving, editing source material</td>
+            </tr>
+            <tr>
+              <td><code>1080p</code></td>
+              <td>Full HD video</td>
+              <td>Local playback on large displays</td>
+            </tr>
+            <tr>
+              <td><code>720p</code></td>
+              <td>HD video, smaller file size</td>
+              <td>Balance of quality and storage</td>
+            </tr>
+            <tr>
+              <td><code>480p / 360p</code></td>
+              <td>Standard definition</td>
+              <td>Low storage, mobile devices</td>
+            </tr>
+            <tr>
+              <td><code>Audio-only MP3</code></td>
+              <td>Audio extracted and converted to MP3</td>
+              <td>Podcasts, music, lectures</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUIREMENTS -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2>Requirements</h2>
+      </div>
+      <div class="req-grid">
+        <div class="req-card">
+          <h3>System</h3>
+          <ul>
+            <li>macOS 13 or later</li>
+            <li>Apple Silicon (arm64)</li>
+            <li>Internet connection for downloading</li>
+          </ul>
+        </div>
+        <div class="req-card">
+          <h3>Bundled — nothing to install</h3>
+          <ul>
+            <li>yt-dlp (bundled)</li>
+            <li>ffmpeg (bundled)</li>
+            <li>ffprobe (bundled)</li>
+          </ul>
+        </div>
+        <div class="req-card">
+          <h3>First launch</h3>
+          <ul>
+            <li>App is ad-hoc signed, not notarized</li>
+            <li>Use Control-click &gt; Open in Finder</li>
+            <li>Or: <code>xattr -dr com.apple.quarantine /Applications/YTDownloader.app</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>FAQ</h2>
+      </div>
+      <dl class="faq">
+        <div class="faq-item">
+          <dt>Is it free?</dt>
+          <dd>Yes. YTDownloader is free to download and use.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>Do I need Homebrew or ffmpeg installed?</dt>
+          <dd>No. yt-dlp, ffmpeg, and ffprobe are all bundled inside the app. Just download and run.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>Where are downloads saved?</dt>
+          <dd>All files go to <code>~/Downloads/YouTube</code> automatically.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>macOS blocks the app on first launch — what do I do?</dt>
+          <dd>Right-click the app in Finder and choose Open, then confirm. Alternatively, run <code>xattr -dr com.apple.quarantine /Applications/YTDownloader.app</code> in Terminal.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>Is Intel Mac supported?</dt>
+          <dd>The published DMG targets Apple Silicon (arm64). Intel users can build from source: <code>cd YTDownloader && make dmg</code>. You need Xcode CLI tools and <code>curl</code>.</dd>
+        </div>
+        <div class="faq-item">
+          <dt>What if a video fails to download?</dt>
+          <dd>yt-dlp may need updating when YouTube changes its format. Rebuild the app or manually replace the bundled <code>yt-dlp</code> binary inside the app package.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <div class="container cta-strip-inner">
+      <div>
+        <h2>Download YTDownloader</h2>
+        <p>v{version} · macOS arm64 · Free</p>
+      </div>
+      <div class="cta-strip-actions">
+        <a href={dmgUrl} class="btn btn-primary btn-lg">Download DMG</a>
+        <a href={releaseUrl} target="_blank" rel="noopener" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.35);">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

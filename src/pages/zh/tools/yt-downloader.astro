@@ -1,0 +1,308 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLatestYTDRelease } from '../../../lib/release-ytdownloader';
+
+const { tag, version, dmgUrl, releaseUrl } = await getLatestYTDRelease();
+
+const features = [
+  {
+    icon: "📋",
+    title: "剪贴板自动识别 — 复制即触发",
+    desc: "将任意 YouTube 链接复制到剪贴板，YTDownloader 立即自动识别并填入输入框。无需手动打开应用再粘贴，复制即准备好下载。",
+  },
+  {
+    icon: "🎬",
+    title: "画质任选 — 最佳、1080p 到 360p，或仅音频 MP3",
+    desc: "支持最佳画质、1080p、720p、480p、360p，以及仅提取音频并转为 MP3。所有选项均通过 ffmpeg 处理，输出格式规范。",
+  },
+  {
+    icon: "📊",
+    title: "实时进度 — 速度、剩余时间与文件大小",
+    desc: "下载过程中实时显示速度、预计剩余时间和文件大小，数据直接来自 yt-dlp，无需猜测。",
+  },
+  {
+    icon: "⏸",
+    title: "暂停、继续和取消下载",
+    desc: "完整的下载控制：中途暂停、稍后继续，或彻底取消。已完成的任务可一键清除，保持界面整洁。",
+  },
+  {
+    icon: "📦",
+    title: "内置 yt-dlp、ffmpeg、ffprobe — 无需额外安装",
+    desc: "yt-dlp、ffmpeg 和 ffprobe 已打包在应用内部，无需 Homebrew，无需配置 PATH，下载即用。",
+  },
+  {
+    icon: "🗂",
+    title: "自动保存至 ~/Downloads/YouTube",
+    desc: "所有下载文件统一保存到 ~/Downloads/YouTube 目录，自动命名，下载文件夹不再杂乱。",
+  },
+];
+
+const steps = [
+  { n: "01", title: "下载并安装", desc: "下载 DMG，将 YTDownloader.app 拖到 /Applications，然后启动。首次打开时 macOS 可能提示未知开发者，在访达中右键点击选择「打开」即可。" },
+  { n: "02", title: "复制 YouTube 链接", desc: "复制任意 YouTube 视频链接，YTDownloader 会自动从剪贴板识别并填入输入框。" },
+  { n: "03", title: "选择画质", desc: "选择所需画质：最佳、1080p、720p、480p、360p，或仅音频 MP3。" },
+  { n: "04", title: "下载完成", desc: "点击「下载」，实时查看速度、剩余时间和文件大小。完成后文件保存至 ~/Downloads/YouTube。" },
+];
+
+const softwareSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "YTDownloader",
+  "operatingSystem": "macOS 13+",
+  "applicationCategory": "MultimediaApplication",
+  "applicationSubCategory": "视频下载工具",
+  "softwareVersion": version,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "url": "https://lingyuetools.org/zh/tools/yt-downloader",
+  "downloadUrl": dmgUrl,
+  "description": "免费原生 macOS YouTube 下载器。剪贴板自动识别，支持最佳/1080p/720p/480p/360p/MP3，实时进度显示，内置 yt-dlp 和 ffmpeg，无需额外安装。",
+  "author": { "@type": "Organization", "name": "LingYue Tools", "url": "https://lingyuetools.org" },
+  "featureList": [
+    "剪贴板自动识别 YouTube 链接",
+    "画质选择：最佳/1080p/720p/480p/360p/仅音频 MP3",
+    "实时下载进度（速度、剩余时间、文件大小）",
+    "暂停、继续、取消下载",
+    "内置 yt-dlp、ffmpeg、ffprobe",
+    "自动保存至 ~/Downloads/YouTube",
+    "SwiftUI 原生 macOS 应用"
+  ],
+  "requirements": "macOS 13 或更高版本，Apple Silicon（arm64）",
+  "isAccessibleForFree": true,
+  "inLanguage": "zh"
+});
+
+const faqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "YTDownloader 免费吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "是的，YTDownloader 完全免费下载和使用。" }},
+    { "@type": "Question", "name": "需要安装 Homebrew 或 ffmpeg 吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不需要。yt-dlp、ffmpeg 和 ffprobe 已内置在应用包中，下载即用，无需任何命令行配置。" }},
+    { "@type": "Question", "name": "下载的文件保存在哪里？",
+      "acceptedAnswer": { "@type": "Answer", "text": "所有下载文件自动保存至 ~/Downloads/YouTube 目录。" }},
+    { "@type": "Question", "name": "macOS 提示无法打开该应用怎么办？",
+      "acceptedAnswer": { "@type": "Answer", "text": "在访达中右键点击应用，选择「打开」后确认。或在终端运行：xattr -dr com.apple.quarantine /Applications/YTDownloader.app" }},
+    { "@type": "Question", "name": "支持 Intel Mac 吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "发布的 DMG 仅支持 Apple Silicon（arm64）。Intel Mac 用户可自行从源码构建：cd YTDownloader && make dmg，需要 Xcode 命令行工具。" }},
+    { "@type": "Question", "name": "如果某个视频下载失败怎么办？",
+      "acceptedAnswer": { "@type": "Answer", "text": "YouTube 格式变更可能导致 yt-dlp 失效。可重新构建应用，或手动替换应用包内的 yt-dlp 二进制文件。" }}
+  ]
+});
+
+const breadcrumbSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://lingyuetools.org/zh" },
+    { "@type": "ListItem", "position": 2, "name": "工具", "item": "https://lingyuetools.org/zh/tools" },
+    { "@type": "ListItem", "position": 3, "name": "YTDownloader" }
+  ]
+});
+---
+
+<Layout title="YTDownloader — 免费原生 macOS YouTube 下载器" description="YTDownloader — 免费原生 macOS YouTube 下载器。剪贴板自动识别，支持最佳/1080p/720p/480p/360p/MP3，实时下载进度，内置 yt-dlp 和 ffmpeg，无需安装额外依赖。">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={softwareSchemaJson} />
+    <script type="application/ld+json" set:html={faqSchemaJson} />
+    <script type="application/ld+json" set:html={breadcrumbSchemaJson} />
+    <link rel="alternate" hreflang="en" href="https://lingyuetools.org/tools/yt-downloader" />
+    <link rel="alternate" hreflang="zh" href="https://lingyuetools.org/zh/tools/yt-downloader" />
+  </Fragment>
+  <Nav slot="nav" />
+
+  <!-- HERO -->
+  <section class="tool-hero">
+    <div class="container tool-hero-inner">
+      <div>
+        <div class="tool-hero-badges">
+          <span class="tool-hero-version">v{version}</span>
+          <span class="tool-hero-platform">macOS arm64</span>
+          <span class="tool-hero-badge-free">免费下载</span>
+        </div>
+        <h1 class="tool-hero-title">YTDownloader</h1>
+        <p class="tool-hero-desc">
+          原生 macOS YouTube 下载器，基于 SwiftUI 构建。复制链接即自动识别，支持多种画质选择，实时显示下载进度。
+          yt-dlp、ffmpeg、ffprobe 全部内置，无需 Homebrew，无需配置，开箱即用。
+        </p>
+        <div class="tool-hero-actions">
+          <a href={dmgUrl} class="btn btn-primary btn-lg">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9M4.5 7l3.5 3.5L11.5 7M2 13h12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            免费下载 DMG
+          </a>
+          <a href="https://github.com/Badakonpro/YTDownloader" target="_blank" rel="noopener" class="btn btn-outline btn-lg">在 GitHub 上查看</a>
+        </div>
+        <p class="tool-hero-req">macOS 13+ · Apple Silicon（arm64）· 无需额外依赖</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>核心功能</h2>
+      </div>
+      <div class="features-grid">
+        {features.map(f => (
+          <div class="feature-card">
+            <div class="feature-icon">{f.icon}</div>
+            <h3>{f.title}</h3>
+            <p>{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2>使用方法</h2>
+      </div>
+      <ol class="steps">
+        {steps.map(s => (
+          <li class="step">
+            <div class="step-number">{s.n}</div>
+            <div>
+              <h3 class="step-title">{s.title}</h3>
+              <p class="step-desc">{s.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- QUALITY OPTIONS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>画质选项</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>选项</th><th>说明</th><th>适用场景</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>最佳</code></td>
+              <td>最高可用分辨率和码率</td>
+              <td>存档、剪辑素材</td>
+            </tr>
+            <tr>
+              <td><code>1080p</code></td>
+              <td>全高清视频</td>
+              <td>大屏本地播放</td>
+            </tr>
+            <tr>
+              <td><code>720p</code></td>
+              <td>高清视频，文件较小</td>
+              <td>兼顾画质与存储</td>
+            </tr>
+            <tr>
+              <td><code>480p / 360p</code></td>
+              <td>标准清晰度</td>
+              <td>节省空间、移动设备</td>
+            </tr>
+            <tr>
+              <td><code>仅音频 MP3</code></td>
+              <td>提取音频并转为 MP3</td>
+              <td>播客、音乐、讲座</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUIREMENTS -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2>系统要求</h2>
+      </div>
+      <div class="req-grid">
+        <div class="req-card">
+          <h3>系统</h3>
+          <ul>
+            <li>macOS 13 或更高版本</li>
+            <li>Apple Silicon（arm64）</li>
+            <li>下载时需要网络连接</li>
+          </ul>
+        </div>
+        <div class="req-card">
+          <h3>已内置 — 无需安装</h3>
+          <ul>
+            <li>yt-dlp（已内置）</li>
+            <li>ffmpeg（已内置）</li>
+            <li>ffprobe（已内置）</li>
+          </ul>
+        </div>
+        <div class="req-card">
+          <h3>首次启动</h3>
+          <ul>
+            <li>应用为临时签名，未经过公证</li>
+            <li>在访达中右键点击选择「打开」</li>
+            <li>或运行：<code>xattr -dr com.apple.quarantine /Applications/YTDownloader.app</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>常见问题</h2>
+      </div>
+      <dl class="faq">
+        <div class="faq-item">
+          <dt>这款应用免费吗？</dt>
+          <dd>是的，YTDownloader 完全免费下载和使用。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>需要安装 Homebrew 或 ffmpeg 吗？</dt>
+          <dd>不需要。yt-dlp、ffmpeg 和 ffprobe 已内置在应用包中，直接使用即可。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>下载的文件保存在哪里？</dt>
+          <dd>所有文件自动保存至 <code>~/Downloads/YouTube</code> 目录。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>macOS 提示无法打开怎么办？</dt>
+          <dd>在访达中右键点击应用，选择「打开」并确认。或在终端执行：<code>xattr -dr com.apple.quarantine /Applications/YTDownloader.app</code></dd>
+        </div>
+        <div class="faq-item">
+          <dt>支持 Intel Mac 吗？</dt>
+          <dd>发布的 DMG 仅支持 Apple Silicon（arm64）。Intel 用户可自行从源码构建：<code>cd YTDownloader && make dmg</code>，需要 Xcode 命令行工具。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>视频下载失败怎么处理？</dt>
+          <dd>YouTube 格式变更可能导致 yt-dlp 失效。可重新构建应用，或手动替换应用包内的 yt-dlp 二进制文件。</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <div class="container cta-strip-inner">
+      <div>
+        <h2>下载 YTDownloader</h2>
+        <p>v{version} · macOS arm64 · 免费</p>
+      </div>
+      <div class="cta-strip-actions">
+        <a href={dmgUrl} class="btn btn-primary btn-lg">下载 DMG</a>
+        <a href={releaseUrl} target="_blank" rel="noopener" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.35);">在 GitHub 上查看</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

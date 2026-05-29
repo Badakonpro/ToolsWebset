@@ -3,8 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { getLatestRelease } from '../lib/release';
+import { getLatestYTDRelease } from '../lib/release-ytdownloader';
 
 const rel = await getLatestRelease();
+const ytdRel = await getLatestYTDRelease();
 
 const organizationSchema = JSON.stringify({
   "@context": "https://schema.org",
@@ -23,6 +25,14 @@ const tools = [
     desc: "Free & open-source Mac app. Transcribe video with Whisper, translate subtitles via Ollama (local, no API key), DeepSeek, OpenAI, or Anthropic. Export SRT, MKV, or MP4.",
     platform: "macOS arm64",
     version: rel.tag,
+    available: true,
+  },
+  {
+    slug: "yt-downloader",
+    name: "YTDownloader",
+    desc: "Free native macOS YouTube downloader. Clipboard auto-detection, quality selection (best/1080p/720p/480p/360p/MP3), live progress. Bundles yt-dlp and ffmpeg.",
+    platform: "macOS arm64",
+    version: ytdRel.tag,
     available: true,
   },
   {

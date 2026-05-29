@@ -3,8 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLatestRelease } from '../../lib/release';
+import { getLatestYTDRelease } from '../../lib/release-ytdownloader';
 
 const rel = await getLatestRelease();
+const ytdRel = await getLatestYTDRelease();
 
 const organizationSchema = JSON.stringify({
   "@context": "https://schema.org",
@@ -23,6 +25,14 @@ const tools = [
     desc: "免费开源 Mac 应用（MIT）。Whisper 转录视频字幕，通过 Ollama（本地，无需 API Key）、DeepSeek、OpenAI 或 Anthropic 翻译，导出 SRT、MKV 或 MP4。",
     platform: "macOS arm64",
     version: rel.tag,
+    available: true,
+  },
+  {
+    slug: "yt-downloader",
+    name: "YTDownloader",
+    desc: "免费原生 macOS YouTube 下载器。剪贴板自动识别链接，支持画质选择（最佳/1080p/720p/480p/360p/MP3），实时进度显示。内置 yt-dlp 和 ffmpeg。",
+    platform: "macOS arm64",
+    version: ytdRel.tag,
     available: true,
   },
   {
