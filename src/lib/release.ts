@@ -21,13 +21,13 @@ export interface LatestReleaseSummary {
 }
 
 const FALLBACK: LatestRelease = {
-  tag: "v1.3.1",
-  version: "1.3.1",
-  date: "2026-05-29",
-  dmgUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/download/v1.3.1/VoxOver-1.3.1-arm64.dmg",
-  dmgFilename: "VoxOver-1.3.1-arm64.dmg",
-  dmgSizeMB: "~112 MB",
-  releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.3.1",
+  tag: "v2.0.1",
+  version: "2.0.1",
+  date: "2026-05-31",
+  dmgUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/download/v2.0.1/VoxOver-2.0.0-native-arm64.dmg",
+  dmgFilename: "VoxOver-2.0.0-native-arm64.dmg",
+  dmgSizeMB: "~22 MB",
+  releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v2.0.1",
 };
 
 export async function getLatestRelease(): Promise<LatestRelease> {
