@@ -29,8 +29,8 @@ const features = [
   },
   {
     icon: "📦",
-    title: "Export SRT, MKV Soft Subtitles, or Hard-Burned MP4",
-    desc: "Export a standalone .srt file, an .mkv with a soft subtitle track (switchable in any player), or a hard-burned .mp4 ready for YouTube or social media upload.",
+    title: "Export SRT, ASS, MKV Soft Subtitles, or Hard-Burned MP4",
+    desc: "Export a standalone .srt file, an .ass styled subtitle file, an .mkv with a soft subtitle track (switchable in any player), or a hard-burned .mp4 ready for YouTube or social media upload.",
   },
   {
     icon: "🖥",
@@ -44,7 +44,7 @@ const steps = [
   { n: "02", title: "Upload your video", desc: "Drop any MP4 or MOV into the Gradio UI. Audio is extracted at 16 kHz mono." },
   { n: "03", title: "Pick a Whisper model", desc: "Select tiny → large depending on your accuracy and speed needs. Model downloads once, then caches locally." },
   { n: "04", title: "Choose a translation backend", desc: "Connect to a running Ollama instance or enter your DeepSeek API key." },
-  { n: "05", title: "Run and export", desc: "Transcription, translation, and muxing all happen in one click. Pick SRT, MKV, or MP4 output." },
+  { n: "05", title: "Run and export", desc: "Transcription, translation, and muxing all happen in one click. Pick SRT, ASS, MKV, or MP4 output." },
 ];
 
 const softwareSchemaJson = JSON.stringify({
@@ -58,7 +58,7 @@ const softwareSchemaJson = JSON.stringify({
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "url": "https://lingyuetools.org/tools/ai-translate-dub",
   "downloadUrl": dmgUrl,
-  "description": "Free macOS app for AI video transcription and subtitle translation. Whisper speech recognition + Ollama/DeepSeek/OpenAI/Anthropic backends. Export SRT, MKV, or hard-burned MP4.",
+  "description": "Free macOS app for AI video transcription and subtitle translation. Whisper speech recognition + Ollama/DeepSeek/OpenAI/Anthropic backends. Export SRT, ASS, MKV, or hard-burned MP4.",
   "author": { "@type": "Organization", "name": "LingYue Tools", "url": "https://lingyuetools.org" },
   "license": "https://opensource.org/licenses/MIT",
   "featureList": [
@@ -68,12 +68,13 @@ const softwareSchemaJson = JSON.stringify({
     "OpenAI API translation with custom Base URL",
     "Anthropic Claude translation",
     "SRT subtitle export",
+    "ASS styled subtitle export",
     "MKV soft subtitle export",
     "MP4 hard-burned subtitle export",
     "Parallel subtitle translation",
     "Global translation context generation"
   ],
-  "requirements": "macOS with Apple Silicon, Python 3, ffmpeg",
+  "requirements": "macOS with Apple Silicon",
   "isAccessibleForFree": true,
   "inLanguage": "en"
 });
@@ -108,7 +109,7 @@ const breadcrumbSchemaJson = JSON.stringify({
 });
 ---
 
-<Layout title="VoxOver — Free Open-Source Mac Subtitle Translator" description="VoxOver — free, open-source (MIT) Mac app for AI video transcription and subtitle translation. Whisper + Ollama (local, no API key), DeepSeek, OpenAI, Anthropic. Export SRT, MKV, or hard-burned MP4. No subscription, no account.">
+<Layout title="VoxOver — Free Open-Source Mac Subtitle Translator" description="VoxOver — free, open-source (MIT) Mac app for AI video transcription and subtitle translation. Whisper + Ollama (local, no API key), DeepSeek, OpenAI, Anthropic. Export SRT, ASS, MKV, or hard-burned MP4. No subscription, no account.">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={softwareSchemaJson} />
     <script type="application/ld+json" set:html={faqSchemaJson} />
@@ -128,7 +129,7 @@ const breadcrumbSchemaJson = JSON.stringify({
         <h1 class="tool-hero-title">VoxOver</h1>
         <p class="tool-hero-desc">
           Transcribe video with Whisper, translate subtitles via Ollama, DeepSeek, OpenAI, or Anthropic,
-          and export SRT, MKV, or hard-burned MP4 — all from a local Mac app.
+          and export SRT, ASS, MKV, or hard-burned MP4 — all from a local Mac app.
           No account required. No subscription.
         </p>
         <div class="tool-hero-actions">
@@ -138,7 +139,7 @@ const breadcrumbSchemaJson = JSON.stringify({
           </a>
           <a href="/download" class="btn btn-outline btn-lg">All Downloads</a>
         </div>
-        <p class="tool-hero-req">macOS · Apple Silicon (arm64) · Python 3 + ffmpeg required</p>
+        <p class="tool-hero-req">macOS · Apple Silicon (arm64)</p>
       </div>
     </div>
   </section>
@@ -199,6 +200,11 @@ const breadcrumbSchemaJson = JSON.stringify({
               <td>Re-use in any editor or player</td>
             </tr>
             <tr>
+              <td><code>.ass</code></td>
+              <td>Advanced SubStation Alpha — styled subtitles with fonts, colors, and positioning</td>
+              <td>Styled captions for video platforms, fan-subs, karaoke</td>
+            </tr>
+            <tr>
               <td><code>.mkv</code></td>
               <td>Original video + soft subtitle track</td>
               <td>Local playback, subtitle toggle in VLC/IINA</td>
@@ -225,8 +231,6 @@ const breadcrumbSchemaJson = JSON.stringify({
           <h3>System</h3>
           <ul>
             <li>macOS (Apple Silicon arm64 recommended)</li>
-            <li>Python 3 installed on your machine</li>
-            <li>ffmpeg (<code>brew install ffmpeg</code>)</li>
           </ul>
         </div>
         <div class="req-card">
