@@ -1,0 +1,10 @@
+name = "lingyuetools"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[assets]
+directory = "./dist"
+
+[[kv_namespaces]]
+binding = "DOWNLOAD_COUNTS"
+id = "d8f0a7d575334ef89a98485d651f6119"

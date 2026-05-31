@@ -58,7 +58,7 @@ const releases = [
 
           <div class="assets-list">
             {r.assets.map(a => (
-              <a href={a.url} class="asset-row">
+              <a href={a.url} class="asset-row" data-asset="voxover-dmg" data-url={a.url} onclick="trackDownload(event, this)">
                 <span class="asset-icon">{a.icon}</span>
                 <div class="asset-info">
                   <span class="asset-label">{a.label}</span>
@@ -71,6 +71,10 @@ const releases = [
                 </span>
               </a>
             ))}
+          </div>
+          <div class="download-stats">
+            <span class="stats-icon">↓</span>
+            <span id="download-count-voxover">—</span> 次下载
           </div>
 
           <div class="release-notes">
@@ -137,4 +141,41 @@ const releases = [
   border-radius: var(--radius-md); padding: 1.25rem 1.5rem;
 }
 .source-note p { font-size: 0.9rem; color: var(--color-text-secondary); }
+
+.download-stats {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8125rem; color: var(--color-text-muted);
+  margin-top: 0.5rem;
+}
+.stats-icon { font-style: normal; }
 </style>
+
+<script>
+const WORKER = "";
+
+async function trackDownload(e, el) {
+  e.preventDefault();
+  const asset = el.dataset.asset;
+  const url = el.dataset.url;
+  try {
+    const res = await fetch(`${WORKER}/download?asset=${asset}`, { method: "POST" });
+    if (res.ok) {
+      const { count } = await res.json();
+      const el2 = document.getElementById(`download-count-${asset.replace("-dmg", "")}`);
+      if (el2) el2.textContent = count.toLocaleString();
+    }
+  } catch (_) {}
+  window.location.href = url;
+}
+
+(async () => {
+  try {
+    const res = await fetch(`${WORKER}/count?asset=voxover-dmg`);
+    if (res.ok) {
+      const { count } = await res.json();
+      const el = document.getElementById("download-count-voxover");
+      if (el) el.textContent = count.toLocaleString();
+    }
+  } catch (_) {}
+})();
+</script>
