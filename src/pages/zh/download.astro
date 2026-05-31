@@ -33,14 +33,14 @@ const releases = [
 ];
 ---
 
-<Layout title="下载" description="下载 LingYue Tools 应用。VoxOver — 免费的 macOS 视频转录与字幕翻译工具。">
+<Layout title="下载" description="下载 LingYue Tools 原生 macOS 应用，针对 Apple Silicon 硬件加速优化。">
   <Nav slot="nav" />
 
   <section class="section">
     <div class="container">
       <div class="page-header">
         <h1>下载</h1>
-        <p>所有工具均免费，无需账号。</p>
+        <p>本站仅提供原生 macOS 软件，支持 Apple Silicon 硬件加速。所有工具均免费，无需账号。</p>
       </div>
 
       {releases.map(r => (
@@ -151,12 +151,16 @@ const releases = [
 </style>
 
 <script>
+// @ts-nocheck
 const WORKER = "";
 
 async function trackDownload(e, el) {
   e.preventDefault();
   const asset = el.dataset.asset;
   const url = el.dataset.url;
+  if (!asset || !url) {
+    return;
+  }
   try {
     const res = await fetch(`${WORKER}/download?asset=${asset}`, { method: "POST" });
     if (res.ok) {

@@ -2,21 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { getLatestReleaseSummary } from '../lib/release';
 
-const entries = [
-  {
-    version: "v1.3.1",
-    date: "2026-05-29",
-    tool: "VoxOver",
-    highlights: [
-      "App renamed to VoxOver",
-      "New OpenAI translation backend (custom Base URL supported, compatible with all OpenAI-format APIs)",
-      "New Anthropic translation backend (Claude series models)",
-      "OpenAI supports one-click model list fetching",
-      "Settings page: new OpenAI / Anthropic configuration sections",
-    ],
-    releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.3.1",
-  },
+const latest = await getLatestReleaseSummary();
+
+const historicalEntries = [
   {
     version: "v1.0.0",
     date: "2026-05-28",
@@ -35,6 +25,17 @@ const entries = [
     ],
     releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.0.0",
   },
+];
+
+const entries = [
+  {
+    version: latest.tag,
+    date: latest.date,
+    tool: "VoxOver",
+    highlights: latest.highlights,
+    releaseUrl: latest.releaseUrl,
+  },
+  ...historicalEntries.filter((entry) => entry.version !== latest.tag),
 ];
 ---
 

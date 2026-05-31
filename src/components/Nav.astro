@@ -18,6 +18,9 @@ const navLinks = lang === 'zh' ? [
 const logoHref = lang === 'zh' ? '/zh/' : '/';
 const downloadHref = `${prefix}/download`;
 const downloadLabel = lang === 'zh' ? '下载 Beta' : 'Download Beta';
+const brandPill = lang === 'zh'
+  ? '原生 macOS · Apple Silicon 硬件加速'
+  : 'Native macOS · Apple Silicon Acceleration';
 
 // Language switcher
 const switchLabel = lang === 'zh' ? 'EN' : '中文';
@@ -48,6 +51,8 @@ const switchHref = lang === 'en'
       ))}
     </nav>
 
+    <span class="nav-brand-pill">{brandPill}</span>
+
     <div class="nav-actions">
       <a href={switchHref} class="lang-toggle" lang={lang === 'zh' ? 'en' : 'zh'}>{switchLabel}</a>
       <a href={downloadHref} class="btn btn-primary nav-cta">
@@ -64,6 +69,7 @@ const switchHref = lang === 'en'
   <!-- Mobile menu -->
   <div class="mobile-menu" id="mobileMenu" hidden>
     <nav class="mobile-nav">
+      <div class="mobile-brand-pill">{brandPill}</div>
       {navLinks.map(link => (
         <a href={link.href} class="mobile-nav-link">{link.label}</a>
       ))}
@@ -138,6 +144,20 @@ const switchHref = lang === 'en'
   .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
   .nav-cta { padding: 0.45rem 1rem; font-size: 0.875rem; }
 
+  .nav-brand-pill {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid #c7d2fe;
+    background: #eef2ff;
+    border-radius: 999px;
+    padding: 0.3rem 0.55rem;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
   .lang-toggle {
     font-size: 0.8125rem; font-weight: 600;
     color: var(--color-text-secondary);
@@ -186,6 +206,21 @@ const switchHref = lang === 'en'
     gap: 0.25rem;
     padding: 1rem 1.25rem 1.25rem;
   }
+  .mobile-brand-pill {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-bottom: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid #c7d2fe;
+    background: #eef2ff;
+    border-radius: 999px;
+    padding: 0.3rem 0.55rem;
+    line-height: 1;
+  }
   .mobile-nav-link {
     padding: 0.6rem 0.75rem;
     border-radius: var(--radius-sm);
@@ -198,7 +233,11 @@ const switchHref = lang === 'en'
   .mobile-nav-link:hover { background: var(--color-bg-muted); }
 
   @media (max-width: 720px) {
-    .nav-links, .nav-actions { display: none; }
+    .nav-links, .nav-actions, .nav-brand-pill { display: none; }
     .nav-hamburger { display: flex; }
+  }
+
+  @media (max-width: 1100px) {
+    .nav-brand-pill { display: none; }
   }
 </style>

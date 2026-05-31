@@ -33,14 +33,14 @@ const releases = [
 ];
 ---
 
-<Layout title="Download" description="Download LingYue Tools apps. VoxOver — free macOS app for video transcription and subtitle translation.">
+<Layout title="Download" description="Download native macOS apps from LingYue Tools, optimized for Apple Silicon hardware acceleration.">
   <Nav slot="nav" />
 
   <section class="section">
     <div class="container">
       <div class="page-header">
         <h1>Downloads</h1>
-        <p>All tools are free. No account required.</p>
+        <p>Mac-only native apps with Apple Silicon hardware acceleration. All tools are free. No account required.</p>
       </div>
 
       {releases.map(r => (
@@ -156,12 +156,16 @@ const releases = [
 </style>
 
 <script>
+// @ts-nocheck
 const WORKER = "";
 
 async function trackDownload(e, el) {
   e.preventDefault();
   const asset = el.dataset.asset;
   const url = el.dataset.url;
+  if (!asset || !url) {
+    return;
+  }
   try {
     const res = await fetch(`${WORKER}/download?asset=${asset}`, { method: "POST" });
     if (res.ok) {

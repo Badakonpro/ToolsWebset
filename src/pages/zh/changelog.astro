@@ -2,21 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { getLatestReleaseSummary } from '../../lib/release';
 
-const entries = [
-  {
-    version: "v1.3.1",
-    date: "2026-05-29",
-    tool: "VoxOver",
-    highlights: [
-      "应用更名为 VoxOver",
-      "新增 OpenAI 翻译后端（支持自定义 Base URL，兼容所有 OpenAI 格式 API）",
-      "新增 Anthropic 翻译后端（Claude 系列模型）",
-      "OpenAI 支持一键拉取模型列表",
-      "设置页面新增 OpenAI / Anthropic 配置区块",
-    ],
-    releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.3.1",
-  },
+const latest = await getLatestReleaseSummary();
+
+const historicalEntries = [
   {
     version: "v1.0.0",
     date: "2026-05-28",
@@ -35,6 +25,17 @@ const entries = [
     ],
     releaseUrl: "https://github.com/Badakonpro/ai-translate-dub/releases/tag/v1.0.0",
   },
+];
+
+const entries = [
+  {
+    version: latest.tag,
+    date: latest.date,
+    tool: "VoxOver",
+    highlights: latest.highlights.length > 0 ? latest.highlights : ["请在 GitHub Release 查看完整更新说明。"],
+    releaseUrl: latest.releaseUrl,
+  },
+  ...historicalEntries.filter((entry) => entry.version !== latest.tag),
 ];
 ---
 

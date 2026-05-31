@@ -13,7 +13,7 @@ const organizationSchema = JSON.stringify({
   "@type": "Organization",
   "name": "LingYue Tools",
   "url": "https://lingyuetools.org",
-  "description": "Free lightweight AI tools for Mac video creators. No subscription, no account.",
+  "description": "Free native macOS tools for video creators, optimized for Apple Silicon hardware acceleration. No subscription, no account.",
   "sameAs": ["https://github.com/Badakonpro"],
   "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "email": "hello@lingyuetools.org" }
 });
@@ -22,7 +22,7 @@ const tools = [
   {
     slug: "ai-translate-dub",
     name: "VoxOver",
-    desc: "Free & open-source Mac app. Transcribe video with Whisper, translate subtitles via Ollama (local, no API key), DeepSeek, OpenAI, or Anthropic. Export SRT, MKV, or MP4.",
+    desc: "Free native macOS app optimized for Apple Silicon hardware acceleration. Transcribe video with Whisper, translate subtitles via Ollama (local, no API key), DeepSeek, OpenAI, or Anthropic. Export SRT, MKV, or MP4.",
     platform: "macOS arm64",
     version: rel.tag,
     available: true,
@@ -90,7 +90,9 @@ const principles = [
         <span class="hero-title-accent">Big workflows.</span>
       </h1>
       <p class="hero-subtitle">
-        LingYue Tools is a personal collection of focused Mac apps for video creators —
+        LingYue Tools is a Mac-only software site.
+        Every app here is developed as a native macOS experience and tuned for Apple Silicon hardware acceleration.
+        Built for video creators —
         subtitle translation, AI dubbing, clip editing, and more.
         No subscription. No account. Just download and run.
       </p>
@@ -171,7 +173,7 @@ const principles = [
           <p class="featured-desc">
             Drop in any video, pick a Whisper model for transcription, choose a translation
             backend (local Ollama, DeepSeek, OpenAI, or Anthropic), and export a translated SRT, MKV soft-sub,
-            or MP4 with baked-in subtitles. Runs entirely on your Mac.
+            or MP4 with baked-in subtitles. Runs natively on macOS with Apple Silicon acceleration.
           </p>
           <div class="featured-actions">
             <a href="/tools/ai-translate-dub" class="btn btn-primary">See Details</a>
