@@ -1,6 +1,6 @@
 /**
  * Cloudflare Worker entry point.
- * - Handles /count and /download API routes for download tracking.
+ * - Handles /api/count and /api/download routes for download tracking.
  * - Passes all other requests to the static asset binding.
  */
 export default {

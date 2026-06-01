@@ -57,7 +57,7 @@ const releases = [
 
           <div class="assets-list">
             {r.assets.map(a => (
-              <a href={a.url} class="asset-row" data-asset="voxover-dmg" data-url={a.url} onclick="trackDownload(event, this)">
+              <a href={a.url} class="asset-row" data-asset="voxover-dmg" data-url={a.url}>
                 <span class="asset-icon">{a.icon}</span>
                 <div class="asset-info">
                   <span class="asset-label">{a.label}</span>
@@ -154,37 +154,36 @@ const releases = [
 .stats-icon { font-style: normal; }
 </style>
 
-<script>
-// @ts-nocheck
-const WORKER = "";
-
-async function trackDownload(e, el) {
-  e.preventDefault();
-  const asset = el.dataset.asset;
-  const url = el.dataset.url;
-  if (!asset || !url) {
-    return;
-  }
-  try {
-    const res = await fetch(`${WORKER}/api/download?asset=${asset}`, { method: "POST" });
-    if (res.ok) {
-      const { count } = await res.json();
-      const el2 = document.getElementById(`download-count-${asset.replace("-dmg", "")}`);
-      if (el2) el2.textContent = count.toLocaleString();
+<script is:inline>
+  (function () {
+    function loadCount() {
+      fetch('/api/count?asset=voxover-dmg')
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (!d) return;
+          var el = document.getElementById('download-count-voxover');
+          if (el) el.textContent = d.count.toLocaleString();
+        })
+        .catch(function () {});
     }
-  } catch (_) {}
-  window.location.href = url;
-}
 
-// 页面加载时获取当前计数
-(async () => {
-  try {
-    const res = await fetch(`${WORKER}/api/count?asset=voxover-dmg`);
-    if (res.ok) {
-      const { count } = await res.json();
-      const el = document.getElementById("download-count-voxover");
-      if (el) el.textContent = count.toLocaleString();
-    }
-  } catch (_) {}
-})();
+    document.addEventListener('click', function (e) {
+      var row = e.target && e.target.closest && e.target.closest('.asset-row[data-asset]');
+      if (!row) return;
+      e.preventDefault();
+      var asset = row.dataset.asset;
+      var url = row.dataset.url;
+      fetch('/api/download?asset=' + asset, { method: 'POST' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (!d) return;
+          var el = document.getElementById('download-count-' + asset.replace('-dmg', ''));
+          if (el) el.textContent = d.count.toLocaleString();
+        })
+        .catch(function () {})
+        .finally(function () { window.location.href = url; });
+    });
+
+    loadCount();
+  })();
 </script>
