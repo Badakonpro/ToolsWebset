@@ -12,16 +12,16 @@ export default {
       return new Response(null, { status: 204 });
     }
 
-    // GET /count?asset=xxx — return current count
-    if (request.method === "GET" && url.pathname === "/count") {
+    // GET /api/count?asset=xxx — return current count
+    if (request.method === "GET" && url.pathname === "/api/count") {
       const asset = url.searchParams.get("asset") || "unknown";
       const val = await env.DOWNLOAD_COUNTS.get(asset);
       const count = val ? parseInt(val) : 0;
       return Response.json({ asset, count });
     }
 
-    // POST /download?asset=xxx — increment and return new count
-    if (request.method === "POST" && url.pathname === "/download") {
+    // POST /api/download?asset=xxx — increment and return new count
+    if (request.method === "POST" && url.pathname === "/api/download") {
       const asset = url.searchParams.get("asset") || "unknown";
       const val = await env.DOWNLOAD_COUNTS.get(asset);
       const count = (val ? parseInt(val) : 0) + 1;

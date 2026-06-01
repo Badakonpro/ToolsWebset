@@ -166,7 +166,7 @@ async function trackDownload(e, el) {
     return;
   }
   try {
-    const res = await fetch(`${WORKER}/download?asset=${asset}`, { method: "POST" });
+    const res = await fetch(`${WORKER}/api/download?asset=${asset}`, { method: "POST" });
     if (res.ok) {
       const { count } = await res.json();
       const el2 = document.getElementById(`download-count-${asset.replace("-dmg", "")}`);
@@ -179,7 +179,7 @@ async function trackDownload(e, el) {
 // 页面加载时获取当前计数
 (async () => {
   try {
-    const res = await fetch(`${WORKER}/count?asset=voxover-dmg`);
+    const res = await fetch(`${WORKER}/api/count?asset=voxover-dmg`);
     if (res.ok) {
       const { count } = await res.json();
       const el = document.getElementById("download-count-voxover");
