@@ -1,10 +1,24 @@
-name = "lingyuetools"
-main = "worker.js"
-compatibility_date = "2024-01-01"
+name = "lingyuetool-rss-magnet"
+main = "worker/index.js"
+compatibility_date = "2026-07-03"
+workers_dev = true
 
-[assets]
-directory = "./dist"
+[vars]
+DEEPSEEK_BASE_URL = "https://api.deepseek.com"
+DEEPSEEK_MODEL = "deepseek-v4-flash"
 
-[[kv_namespaces]]
-binding = "DOWNLOAD_COUNTS"
-id = "d8f0a7d575334ef89a98485d651f6119"
+[[routes]]
+pattern = "lingyuetools.org"
+zone_id = "b6b7ae277e7d2d48144eae81109fed4e"
+custom_domain = true
+
+[[routes]]
+pattern = "www.lingyuetools.org"
+zone_id = "b6b7ae277e7d2d48144eae81109fed4e"
+custom_domain = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "lingyuetools-db"
+database_id = "044f6770-c615-4c6a-b2bb-60a91dcf27bb"
+migrations_dir = "migrations"
